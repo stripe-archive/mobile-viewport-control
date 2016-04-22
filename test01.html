@@ -10,13 +10,17 @@
   Verifies that we can successfully measure the initial scale.
   Try both portrait and landscape.
   </p>
+  <div id="result">
+  </div>
 
   <script src="index.js"></script>
   <script src="test.js"></script>
   <script>
   setTimeout(function() {
-    runTest(function() {
-      return mobileViewportControl.getScale() === 1.25;
+    assert({
+        name: "getScale()",
+        actual: mobileViewportControl.getScale(),
+        expected: 1.25,
     });
   }, 200);
   </script>
