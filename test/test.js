@@ -3,6 +3,7 @@ var globalTest = {
   totalPass: 0,
   cases: [],
   waitLength: 100,
+  epsilon: 0.002, // scale equality threshold
 };
 
 if (window.runBtn) {
@@ -17,7 +18,10 @@ if (window.runBtn) {
 }
 
 function assert(test) {
-  test.success = test.actual === test.expected;
+  var isExact = test.actual === test.expected;
+  var isClose = Math.abs(test.actual - test.expected) < globalTest.epsilon;
+
+  test.success = isClose;
   if (test.success) {
     globalTest.totalPass++;
   }
@@ -31,6 +35,7 @@ function assert(test) {
     resultDiv.innerHTML += (
       "<div>"+
       "&#x2714; "+test.name+" is "+test.expected+
+      (!isExact && isClose ? "~" : "")+
       "</div>"
     );
   }
