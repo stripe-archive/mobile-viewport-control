@@ -93,4 +93,4 @@
     setScale: setScale,
     restoreScale: restoreScale
   };
-});
+}));
