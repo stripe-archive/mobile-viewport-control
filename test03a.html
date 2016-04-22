@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta id="metaTag" name="viewport" content="initial-scale=1">
+</head>
+<body>
+  <h1>Test 3a</h1>
+  <h2>Set Scale by modifying meta tag</h2>
+  <p>
+  Verifies that we can set the scale by modifying the
+  initial-scale of an existing meta tag.
+  </p>
+  <div id="resultDiv"></div>
+
+  <script src="index.js"></script>
+  <script src="test.js"></script>
+
+  <script>
+
+  setTimeout(function(){
+    metaTag.setAttribute("content", "initial-scale=1.25");
+  }, 200);
+  setTimeout(function() {
+    assert({
+        name: "getScale()",
+        actual: mobileViewportControl.getScale(),
+        expected: 1.25,
+    });
+  }, 400);
+
+  </script>
+
+</body>
+</html>
