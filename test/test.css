@@ -1,2 +1,4 @@
 html, body {
+  /* forces a layout viewport size (remove to vary tests) */
+  width: 1024px; 
 }
