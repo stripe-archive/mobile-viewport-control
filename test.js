@@ -1,4 +1,8 @@
-var globalTest = { success: true, cases: [] };
+var globalTest = {
+  success: true,
+  cases: [],
+  waitLength: 100,
+};
 
 function assert(test) {
   test.success = test.actual === test.expected;

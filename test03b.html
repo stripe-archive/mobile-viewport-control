@@ -22,14 +22,15 @@
     meta.name = "viewport";
     meta.content = "initial-scale=1.25";
     document.head.appendChild(meta);
-  }, 200);
-  setTimeout(function() {
-    assert({
-        name: "getScale()",
-        actual: mobileViewportControl.getScale(),
-        expected: 1.25,
-    });
-  }, 400);
+
+    setTimeout(function() {
+      assert({
+          name: "getScale()",
+          actual: mobileViewportControl.getScale(),
+          expected: 1.25,
+      });
+    }, globalTest.waitLength);
+  }, globalTest.waitLength);
 
   </script>
 
