@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.25">
+</head>
+<body>
+  <h1>Test 1</h1>
+  <h2>Get Initial Scale</h2>
+  <p>
+  Verifies that we can successfully measure the initial scale.
+  Try both portrait and landscape.
+  </p>
+
+  <script src="index.js"></script>
+  <script src="test.js"></script>
+  <script>
+  setTimeout(function() {
+    runTest(function() {
+      return mobileViewportControl.getScale() === 1.25;
+    });
+  }, 200);
+  </script>
+</body>
+</html>
