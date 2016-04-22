@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="initial-scale=1.25">
+  <link rel="stylesheet" type="text/css" href="test.css">
 </head>
 <body>
   <h1>Test 1</h1>
@@ -15,13 +16,17 @@
   <script src="index.js"></script>
   <script src="test.js"></script>
   <script>
-  setTimeout(function() {
-    assert({
-        name: "getScale()",
-        actual: mobileViewportControl.getScale(),
-        expected: 1.25,
-    });
-  }, globalTest.waitLength);
+
+  testSequence([
+    function() {
+      assert({
+          name: "getScale()",
+          actual: mobileViewportControl.getScale(),
+          expected: 1.25,
+      });
+    },
+  ]);
+
   </script>
 </body>
 </html>
