@@ -17,15 +17,17 @@
   <script src="test.js"></script>
   <script>
 
-  testSequence([
-    function() {
-      assert({
-          name: "getScale()",
-          actual: mobileViewportControl.getScale(),
-          expected: 1.25,
-      });
-    },
-  ]);
+  globalTest.run = function(){
+    testSequence([
+      function() {
+        assert({
+            name: "getScale()",
+            actual: mobileViewportControl.getScale(),
+            expected: 1.25,
+        });
+      },
+    ]);
+  };
 
   </script>
 </body>

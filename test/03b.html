@@ -5,12 +5,11 @@
   <link rel="stylesheet" type="text/css" href="test.css">
 </head>
 <body>
-  <h1>Test 2c</h1>
-  <h2>Set Scale by adding/removing new meta tag</h2>
+  <h1>Test 3b</h1>
+  <h2>Set Scale by adding new meta tag</h2>
   <p>
   Verifies that we can set the scale by adding a new
-  meta tag with an initial-scale, and then removing
-  the meta tag to cleanup.
+  meta tag with *-scale.
   </p>
   <button id="runBtn">Run Test</button>
   <div id="resultDiv"></div>
@@ -27,7 +26,11 @@
       function(){
         newMeta = document.createElement('meta');
         newMeta.name = "viewport";
-        newMeta.content = "initial-scale=1.25";
+        newMeta.content = (
+          "initial-scale=1.25,"+
+          "minimum-scale=1.25,"+
+          "maximum-scale=1.25"
+        );
         document.head.appendChild(newMeta);
       },
       function() {
@@ -36,15 +39,11 @@
             actual: mobileViewportControl.getScale(),
             expected: 1.25,
         });
-        document.head.removeChild(newMeta);
-      },
-      function() {
-        assert({
-            name: "getScale() after removal",
-            actual: mobileViewportControl.getScale(),
-            expected: 1.25,
-        });
-        origMeta.setAttribute("content", "initial-scale=1");
+        origMeta.setAttribute("content", (
+          "initial-scale=1,"+
+          "minimum-scale=1,"+
+          "maximum-scale=1"
+        ));
       },
       function() {
         assert({
@@ -52,7 +51,11 @@
           actual: mobileViewportControl.getScale(),
           expected: 1,
         });
-      }
+        origMeta.setAttribute("content", "initial-scale=1");
+      },
+      function() {
+        log("Make sure you can zoom now.");
+      },
     ]);
   };
 

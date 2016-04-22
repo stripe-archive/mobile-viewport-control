@@ -5,6 +5,17 @@ var globalTest = {
   waitLength: 100,
 };
 
+if (window.runBtn) {
+  runBtn.onclick = function() {
+    runBtn.parentElement.removeChild(runBtn);
+    globalTest.run();
+  }
+} else {
+  setTimeout(function() {
+    globalTest.run();
+  }, 1);
+}
+
 function assert(test) {
   test.success = test.actual === test.expected;
   if (test.success) {
@@ -32,6 +43,14 @@ function assert(test) {
       "</div>"
     );
   }
+}
+
+function log(msg) {
+  resultDiv.innerHTML += (
+    "<div>"+
+    "&#9758; "+msg+
+    "</div>"
+  );
 }
 
 function testSequence(funcs) {
