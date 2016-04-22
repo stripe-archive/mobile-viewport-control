@@ -1,18 +1,27 @@
-function assert(test) {
-  var success = test.actual === test.expected;
-  window.testResult = success;
-  document.body.style.background = success ? "#0F0" : "#F00";
+var globalTest = { success: true, cases: [] };
 
-  if (success) {
-    result.innerHTML = [
-      "&#x2714; "+test.name+" is "+test.expected
-    ].join("<br>");
+function assert(test) {
+  test.success = test.actual === test.expected;
+
+  globalTest.success &= test.success;
+  globalTest.cases.push(test);
+
+  document.body.style.background = globalTest.success ? "#0F0" : "#F00";
+
+  if (test.success) {
+    resultDiv.innerHTML += (
+      "<div>"+
+      "&#x2714; "+test.name+" is "+test.expected+
+      "</div>"
+    );
   }
   else {
-    result.innerHTML = [
-      "&#x2718; "+test.name,
-      "<b>expected</b>: "+test.expected,
-      "<b>actual</b>: "+test.actual,
-    ].join("<br>");
+    resultDiv.innerHTML += (
+      "<div>"+
+      "&#x2718; "+test.name+"<br>"+
+      "<b>expected</b>: "+test.expected+"<br>"+
+      "<b>actual</b>: "+test.actual+
+      "</div>"
+    );
   }
 }
