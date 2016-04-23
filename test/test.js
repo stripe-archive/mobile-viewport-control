@@ -58,12 +58,16 @@ function log(msg) {
   );
 }
 
+function finishTesting() {
+  resultDiv.innerHTML += (
+    (globalTest.success ? "SUCCESS" : "FAILED") +
+    " (" + globalTest.totalPass + "/" + globalTest.cases.length + " passed)"
+  );
+}
+
 function testSequence(funcs) {
   if (funcs.length === 0) {
-    resultDiv.innerHTML += (
-      (globalTest.success ? "SUCCESS" : "FAILED") +
-      " (" + globalTest.totalPass + "/" + globalTest.cases.length + " passed)"
-    );
+    finishTesting();
     return;
   }
   setTimeout(function(){

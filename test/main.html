@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+  <h1>Main Test</h1>
+  <h2>Set and Restore Scale using our lib</h2>
+  <p>
+  Verifies that we can set and restore the scale
+  using the current methods of our library.
+  </p>
+  <button id="runBtn">Run Test</button>
+  <div id="resultDiv"></div>
+
+  <script src="../index.js"></script>
+  <script src="test.js"></script>
+
+  <script>
+
+  globalTest.run = function(){
+    var origScale;
+
+    setTimeout(function(){
+      origScale = mobileViewportControl.getScale();
+
+      mobileViewportControl.setScale(1.25, true, function(){
+        assert({
+          name: "getScale()",
+          actual: mobileViewportControl.getScale(),
+          expected: 1.25,
+        });
+
+        setTimeout(function(){
+          mobileViewportControl.restoreScale(true, function(){
+            assert({
+              name: "getScale() after restore",
+              actual: mobileViewportControl.getScale(),
+              expected: origScale,
+            });
+            finishTesting();
+          });
+        }, globalTest.waitLength);
+      });
+    }, globalTest.waitLength);
+  }, globalTest.waitLength);
+
+  </script>
+
+</body>
+</html>
