@@ -11,7 +11,7 @@
 }(this, function() {
 
   var tagID = '__viewportControl-master-ecbd7__';
-  var refreshDelay = 100;
+  var refreshDelay = 200;
 
   /* Calculating current scale
    * simplified from: http://menacingcloud.com/?c=viewportScale

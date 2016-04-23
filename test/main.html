@@ -24,6 +24,7 @@
 
     setTimeout(function(){
       origScale = mobileViewportControl.getScale();
+      log("getScale() is " + origScale + " before test");
 
       mobileViewportControl.setScale(1.25, true, function(){
         assert({
@@ -32,19 +33,17 @@
           expected: 1.25,
         });
 
-        setTimeout(function(){
-          mobileViewportControl.restoreScale(true, function(){
-            assert({
-              name: "getScale() after restore",
-              actual: mobileViewportControl.getScale(),
-              expected: origScale,
-            });
-            finishTesting();
+        mobileViewportControl.restoreScale(function(){
+          assert({
+            name: "getScale() after restore",
+            actual: mobileViewportControl.getScale(),
+            expected: origScale,
           });
-        }, globalTest.waitLength);
+          finishTesting();
+        });
       });
     }, globalTest.waitLength);
-  }, globalTest.waitLength);
+  };
 
   </script>
 
