@@ -54,6 +54,19 @@ would crawl all combinations.
   - manual zoom remembered before page refresh
   - manual zoom after page load and before test run
 
+### Live Test Links
+
+Open these in a mobile browser to test.
+
+- [test 01](http://shaunstripe.github.io/mobileViewportControl/test/01)
+- [test 02a](http://shaunstripe.github.io/mobileViewportControl/test/02a)
+- [test 02b](http://shaunstripe.github.io/mobileViewportControl/test/02b)
+- [test 02c](http://shaunstripe.github.io/mobileViewportControl/test/02c)
+- [test 03a](http://shaunstripe.github.io/mobileViewportControl/test/03a)
+- [test 03b](http://shaunstripe.github.io/mobileViewportControl/test/03b)
+- [test 03c](http://shaunstripe.github.io/mobileViewportControl/test/03c)
+- [test main](http://shaunstripe.github.io/mobileViewportControl/test/main)
+
 ## Target Browsers
 
 - iOS
