@@ -10,12 +10,8 @@
   }
 }(this, function() {
 
-  var tagID = '__viewportControl-master-ecbd7__';
-  var refreshDelay = 200;
-
-  /* Calculating current scale
-   * simplified from: http://menacingcloud.com/?c=viewportScale
-   */
+  // Calculating current scale
+  // simplified from: http://menacingcloud.com/?c=viewportScale
 
   function getOrientation() {
     var degrees = window.orientation;
@@ -40,19 +36,35 @@
     return screenWidth / visualViewportWidth;
   }
 
-  var originalScale;
 
-  function setScale(scale, userScalable, doneCallback) {
+  // A unique ID of the meta-viewport tag we must create
+  // to freeze the viewport.
+  var tagID = '__viewportControl-master-ecbd7__';
+
+  // An empirical guess for the maximum time that we have to
+  // wait before we are confident a viewport change has registered.
+  var refreshDelay = 200;
+
+  // Original viewport state before freezing.
+  var originalScale;
+  var originalScroll;
+
+  // Freeze the viewport to a given scale.
+  function freeze(scale, doneCallback) {
     var element = document.getElementById(tagID);
     if (!element) {
       originalScale = getScale();
+      originalScroll = {
+        left: document.body.scrollLeft,
+        top: document.body.scrollTop,
+      };
       element = document.createElement('meta');
       element.id = tagID;
       element.name = 'viewport';
       document.head.appendChild(element);
     }
     element.setAttribute('content', [
-      'user-scalable='+(userScalable ? 'yes' : 'no'),
+      'user-scalable=no',
       'initial-scale='+scale,
       'minimum-scale='+scale,
       'maximum-scale='+scale
@@ -63,13 +75,15 @@
     }
   }
 
-  function restoreScale(doneCallback) {
+  // Thaw the viewport, restoring the scale and scroll to what it
+  // was before freezing.
+  function thaw(doneCallback) {
     var element = document.getElementById(tagID);
     if (!element) {
       return;
     }
 
-    setScale(originalScale, true);
+    freeze(originalScale);
 
     var viewports = document.querySelectorAll('meta[name=viewport]');
     var i,v;
@@ -82,6 +96,8 @@
 
     setTimeout(function() {
       document.head.removeChild(element);
+      document.body.scrollLeft = originalScroll.left;
+      document.body.scrollTop = originalScroll.top;
       if (doneCallback) {
         doneCallback();
       }
@@ -90,7 +106,7 @@
 
   return {
     getScale: getScale,
-    setScale: setScale,
-    restoreScale: restoreScale
+    freeze: freeze,
+    thaw: thaw
   };
 }));

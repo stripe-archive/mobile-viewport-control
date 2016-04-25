@@ -26,14 +26,14 @@
       origScale = mobileViewportControl.getScale();
       log("getScale() is " + origScale + " before test");
 
-      mobileViewportControl.setScale(1.25, true, function(){
+      mobileViewportControl.freeze(1.25, function(){
         assert({
           name: "getScale()",
           actual: mobileViewportControl.getScale(),
           expected: 1.25,
         });
 
-        mobileViewportControl.restoreScale(function(){
+        mobileViewportControl.thaw(function(){
           assert({
             name: "getScale() after restore",
             actual: mobileViewportControl.getScale(),
