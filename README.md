@@ -38,30 +38,41 @@ viewport.thaw(() => console.log("notified when thawed!"));
 
 ## Compatibility
 
-| Mobile Browser             | [Measure?]\* | [Freeze?]                                 | [Thaw?]              |
-|----------------------------|--------------|-------------------------------------------|----------------------|
-| iOS Safari                 | Y            | Y                                         | Y                    |
-| iOS UIWebView              | Y            | Fails if user manually zoomed beforehand. | Y if freeze succeeds |
-| iOS WKWebView              | Y            | Y                                         | Y                    |
-| iOS SFSafariViewController | Y            | Y                                         | Y                    |
-| iOS Chrome                 | Y            |                                           |                      |
-| iOS Firefox                | Y            |                                           |                      |
-| iOS Opera Mini             | Y            |                                           |                      |
-| Android Browser (Stock)    |              |                                           |                      |
-| Android Chrome             |              |                                           |                      |
-| Android WebView            |              |                                           |                      |
-| Android Chrome Custom Tabs |              |                                           |                      |
-| Android Firefox            |              |                                           |                      |
-| Android Opera Mini         |              |                                           |                      |
+Compatibility is measured with a combination of automatic/manual testing:
+
+1. __[Measure Test]__ - verify that we can measure the current viewport scale.
+1. __[Freeze Test]__ - verify that we can set and freeze the viewport scale.
+  1. Manual step - pinch-zoom before starting the test
+  1. Manual step - verify that you cannot pinch-zoom after the test
+1. __[Thaw Test]__ - verify that we can restore the viewport scale and bounds.
+  1. Manual step - pinch-zoom before starting the test
+  1. Manual step - verify that you can still pinch-zoom after the test
+
+| Mobile Browser             | [Measure Test]\* | [Freeze Test]                             | [Thaw Test]          |
+|----------------------------|------------------|-------------------------------------------|----------------------|
+| iOS Safari                 | Y                | Y                                         | Y                    |
+| iOS UIWebView              | Y                | Fails if user manually zoomed beforehand. | Y if freeze succeeds |
+| iOS WKWebView              | Y                | Y                                         | Y                    |
+| iOS SFSafariViewController | Y                | Y                                         | Y                    |
+| iOS Chrome                 | Y                |                                           |                      |
+| iOS Firefox                | Y                |                                           |                      |
+| iOS Opera Mini             | Y                |                                           |                      |
+| Android Browser (Stock)    |                  |                                           |                      |
+| Android Chrome             |                  |                                           |                      |
+| Android WebView            |                  |                                           |                      |
+| Android Chrome Custom Tabs |                  |                                           |                      |
+| Android Firefox            |                  |                                           |                      |
+| Android Opera Mini         |                  |                                           |                      |
 
 _\* This test fails in the iOS Simulator because initial-scale is ignored there for wide pages for some reason._
 
-[Measure?]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure
-[Freeze?]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze
-[Thaw?]:http://shaunstripe.github.io/mobileViewportControl/test/03-thaw
+[Measure Test]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure
+[Freeze Test]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze
+[Thaw Test]:http://shaunstripe.github.io/mobileViewportControl/test/03-thaw
 
-The outcome of the tests will vary depending on the following.  Ideally, we
-would crawl all combinations.
+### Variables
+
+We currently do not test all variables, but the test outcomes depend on the following:
 
 - browser/platform
 - page width (modify in `test.css`)
@@ -72,3 +83,4 @@ would crawl all combinations.
   - manual zoom remembered before page refresh
   - manual zoom after page load and before test run
 - initial zoom bounds (controlled by page's original viewport meta tags)
+
