@@ -7,6 +7,11 @@ viewport with one or more meta tags:
 <meta name="viewport" content="name=value,name=value,...">
 ```
 
+> See Quirksmode for more context: [1], [2]
+
+[1]:http://www.quirksmode.org/mobile/viewports2.html
+[2]:http://www.quirksmode.org/mobile/metaviewport/
+
 The goal of this project is to see if we can use these tags to dynamically
 modify the viewport at runtime. Specifically, we want to freeze the viewport at
 some zoom level, then restore the viewport later.
@@ -46,13 +51,6 @@ viewport.thaw(() => console.log("notified when thawed!"));
 | Android WebView            |                     |                     |
 | Android Chrome Custom Tabs |                     |                     |
 | Android Firefox            |                     |                     |
-
-## Background
-
-Quirksmode offers full descriptions on what is known about mobile viewports:
-
-- [quirksmode - A tale of two viewports - part two](http://www.quirksmode.org/mobile/viewports2.html)
-- [quirksmode - Meta viewport](http://www.quirksmode.org/mobile/metaviewport/)
 
 ## Testing
 
