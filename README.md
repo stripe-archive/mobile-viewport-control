@@ -38,19 +38,23 @@ viewport.thaw(() => console.log("notified when thawed!"));
 
 ## Compatibility
 
-| Mobile Browser             | [Measure?] | [Freeze?]                                 | [Thaw?]              |
-|----------------------------|------------|-------------------------------------------|----------------------|
-| iOS Safari                 |            | Y                                         | Y                    |
-| iOS UIWebView              |            | Fails if user manually zoomed beforehand. | Y if freeze succeeds |
-| iOS WKWebView              |            | Y                                         | Y                    |
-| iOS SFSafariViewController |            | Y                                         | Y                    |
-| iOS Chrome                 |            |                                           |                      |
-| iOS Firefox                |            |                                           |                      |
-| Android Browser (Stock)    |            |                                           |                      |
-| Android Chrome             |            |                                           |                      |
-| Android WebView            |            |                                           |                      |
-| Android Chrome Custom Tabs |            |                                           |                      |
-| Android Firefox            |            |                                           |                      |
+| Mobile Browser             | [Measure?]\* | [Freeze?]                                 | [Thaw?]              |
+|----------------------------|--------------|-------------------------------------------|----------------------|
+| iOS Safari                 | Y            | Y                                         | Y                    |
+| iOS UIWebView              | Y            | Fails if user manually zoomed beforehand. | Y if freeze succeeds |
+| iOS WKWebView              | Y            | Y                                         | Y                    |
+| iOS SFSafariViewController | Y            | Y                                         | Y                    |
+| iOS Chrome                 | Y            |                                           |                      |
+| iOS Firefox                | Y            |                                           |                      |
+| iOS Opera Mini             | Y            |                                           |                      |
+| Android Browser (Stock)    |              |                                           |                      |
+| Android Chrome             |              |                                           |                      |
+| Android WebView            |              |                                           |                      |
+| Android Chrome Custom Tabs |              |                                           |                      |
+| Android Firefox            |              |                                           |                      |
+| Android Opera Mini         |              |                                           |                      |
+
+_\* This test fails in the iOS Simulator because initial-scale is ignored there for wide pages for some reason._
 
 [Measure?]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure
 [Freeze?]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze
