@@ -48,21 +48,21 @@ Compatibility is measured with a combination of automatic/manual testing:
   1. Manual step - pinch-zoom before starting the test
   1. Manual step - verify that you can still pinch-zoom after the test
 
-| Mobile Browser             | [Measure Test]\* | [Freeze Test]                             | [Thaw Test]                                      |
-|----------------------------|------------------|-------------------------------------------|--------------------------------------------------|
-| iOS Safari                 | Y                | Y                                         | Fails if user does not manually zoom beforehand. |
-| iOS UIWebView              | Y                | Fails if user manually zoomed beforehand. | Fails if user does not manually zoom beforehand. |
-| iOS WKWebView              | Y                | Y                                         | Fails if user does not manually zoom beforehand. |
-| iOS SFSafariViewController | Y                | Y                                         | Fails if user does not manually zoom beforehand. |
-| iOS Chrome                 | Y                | Y                                         | Fails if user does not manually zoom beforehand. |
-| iOS Firefox                | Y                | Y                                         | Fails if user does not manually zoom beforehand. |
-| iOS Opera Mini             | Y                | Fails if user manually zoomed beforehand. | Fails.                                           |
-| Android Browser (Stock)    |                  |                                           |                                                  |
-| Android Chrome             |                  |                                           |                                                  |
-| Android WebView            |                  |                                           |                                                  |
-| Android Chrome Custom Tabs |                  |                                           |                                                  |
-| Android Firefox            |                  |                                           |                                                  |
-| Android Opera Mini         |                  |                                           |                                                  |
+| Mobile Browser             | [Measure Test]\* | [Freeze Test]                             | [Thaw Test]           |
+|----------------------------|------------------|-------------------------------------------|-----------------------|
+| iOS Safari                 | Y                | Y                                         | Y                     |
+| iOS UIWebView              | Y                | Fails if user manually zoomed beforehand. | Y if freeze succeeds. |
+| iOS WKWebView              | Y                | Y                                         | Y                     |
+| iOS SFSafariViewController | Y                | Y                                         | Y                     |
+| iOS Chrome                 | Y                | Y                                         | Y                     |
+| iOS Firefox                | Y                | Y                                         | Y                     |
+| iOS Opera Mini             | Y                | Fails if user manually zoomed beforehand. | Y if freeze succeeds. |
+| Android Browser (Stock)    |                  |                                           |                       |
+| Android Chrome             |                  |                                           |                       |
+| Android WebView            |                  |                                           |                       |
+| Android Chrome Custom Tabs |                  |                                           |                       |
+| Android Firefox            |                  |                                           |                       |
+| Android Opera Mini         |                  |                                           |                       |
 
 _\* This test fails in the iOS Simulator because initial-scale is ignored there for wide pages for some reason._
 
