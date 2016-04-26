@@ -57,7 +57,7 @@ Compatibility is measured with a combination of automatic/manual testing:
 | iOS Chrome                 | Y                | Y                                             | Y                     |
 | iOS Firefox                | Y                | Y                                             | Y                     |
 | iOS Opera Mini             | Y                | Fails if user pinch-zooms before freezing\*\* | Y if freeze succeeds. |
-| Android Browser (Stock)    |                  |                                               |                       |
+| Android Browser (Stock)    | ?                | ?                                             | ?                     |
 | Android Chrome             | Y                | Y                                             | Y                     |
 | Android WebView            | Y                | Y                                             | Y                     |
 | Android Chrome Custom Tabs | Y                | Y                                             | Y                     |
