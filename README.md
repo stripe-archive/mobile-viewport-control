@@ -38,27 +38,23 @@ viewport.thaw(() => console.log("notified when thawed!"));
 
 ## Compatibility
 
-| Mobile Browser             | Freeze?             | Thaw?               |
-|----------------------------|---------------------|---------------------|
-| iOS Safari                 |                     |                     |
-| iOS UIWebView              |                     |                     |
-| iOS WKWebView              |                     |                     |
-| iOS SFSafariViewController |                     |                     |
-| iOS Chrome                 |                     |                     |
-| iOS Firefox                |                     |                     |
-| Android Browser (Stock)    |                     |                     |
-| Android Chrome             |                     |                     |
-| Android WebView            |                     |                     |
-| Android Chrome Custom Tabs |                     |                     |
-| Android Firefox            |                     |                     |
+| Mobile Browser             | [Measure?] | [Freeze?]                                 | [Thaw?]              |
+|----------------------------|------------|-------------------------------------------|----------------------|
+| iOS Safari                 |            | Y                                         | Y                    |
+| iOS UIWebView              |            | Fails if user manually zoomed beforehand. | Y if freeze succeeds |
+| iOS WKWebView              |            | Y                                         | Y                    |
+| iOS SFSafariViewController |            | Y                                         | Y                    |
+| iOS Chrome                 |            |                                           |                      |
+| iOS Firefox                |            |                                           |                      |
+| Android Browser (Stock)    |            |                                           |                      |
+| Android Chrome             |            |                                           |                      |
+| Android WebView            |            |                                           |                      |
+| Android Chrome Custom Tabs |            |                                           |                      |
+| Android Firefox            |            |                                           |                      |
 
-## Testing
-
-The `test/` directory contains html files for each test case.  The numbered
-files represent unique methods for setting the viewport scale, not using the
-library.  The `main.html` test case uses the library's current method for
-setting the viewport scale.  That way, when browser behavior changes in the
-future, we can have visibility on which specific methods are working.
+[Measure?]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure
+[Freeze?]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze
+[Thaw?]:http://shaunstripe.github.io/mobileViewportControl/test/03-thaw
 
 The outcome of the tests will vary depending on the following.  Ideally, we
 would crawl all combinations.
@@ -71,16 +67,4 @@ would crawl all combinations.
   - default zoom specified in initial-scale
   - manual zoom remembered before page refresh
   - manual zoom after page load and before test run
-
-### Live Test Links
-
-Open these in a mobile browser to test.
-
-- [test 01](http://shaunstripe.github.io/mobileViewportControl/test/01)
-- [test 02a](http://shaunstripe.github.io/mobileViewportControl/test/02a)
-- [test 02b](http://shaunstripe.github.io/mobileViewportControl/test/02b)
-- [test 02c](http://shaunstripe.github.io/mobileViewportControl/test/02c)
-- [test 03a](http://shaunstripe.github.io/mobileViewportControl/test/03a)
-- [test 03b](http://shaunstripe.github.io/mobileViewportControl/test/03b)
-- [test 03c](http://shaunstripe.github.io/mobileViewportControl/test/03c)
-- [test main](http://shaunstripe.github.io/mobileViewportControl/test/main)
+- initial zoom bounds (controlled by page's original viewport meta tags)

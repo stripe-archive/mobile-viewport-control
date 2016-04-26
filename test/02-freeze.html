@@ -5,12 +5,7 @@
   <link rel="stylesheet" type="text/css" href="test.css">
 </head>
 <body>
-  <h1>Main Test</h1>
-  <h2>Set and Restore Scale using our lib</h2>
-  <p>
-  Verifies that we can set and restore the scale
-  using the current methods of our library.
-  </p>
+  <h1>Freeze Test</h1>
   <button id="runBtn">Run Test</button>
   <div id="resultDiv"></div>
 
@@ -24,23 +19,16 @@
 
     setTimeout(function(){
       origScale = mobileViewportControl.getScale();
-      log("getScale() is " + origScale + " before test");
+      log("getScale() is " + origScale + " before freeze");
 
       mobileViewportControl.freeze(1.25, function(){
         assert({
-          name: "getScale()",
+          name: "getScale() after freeze",
           actual: mobileViewportControl.getScale(),
           expected: 1.25,
         });
-
-        mobileViewportControl.thaw(function(){
-          assert({
-            name: "getScale() after restore",
-            actual: mobileViewportControl.getScale(),
-            expected: origScale,
-          });
-          finishTesting();
-        });
+        log("please verify that you CANNOT pinch-zoom");
+        finishTesting();
       });
     }, globalTest.waitLength);
   };

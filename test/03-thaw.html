@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+  <h1>Thaw Test</h1>
+  <button id="runBtn">Run Test</button>
+  <div id="resultDiv"></div>
+
+  <script src="../index.js"></script>
+  <script src="test.js"></script>
+
+  <script>
+
+  globalTest.run = function(){
+    var origScale;
+
+    setTimeout(function(){
+      origScale = mobileViewportControl.getScale();
+      log("getScale() is " + origScale + " before freeze");
+
+      mobileViewportControl.freeze(1.25, function(){
+        assert({
+          name: "getScale() after freeze",
+          actual: mobileViewportControl.getScale(),
+          expected: 1.25,
+        });
+
+        mobileViewportControl.thaw(function(){
+          assert({
+            name: "getScale() after thaw",
+            actual: mobileViewportControl.getScale(),
+            expected: origScale,
+          });
+          log("please verify that you CAN pinch-zoom");
+          finishTesting();
+        });
+      });
+    }, globalTest.waitLength);
+  };
+
+  </script>
+
+</body>
+</html>
