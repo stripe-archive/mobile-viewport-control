@@ -20,7 +20,7 @@ npm install mobileViewportControl
 ```js
 const viewport = require('mobileViewportControl');
 
-// Dynamically freeze the viewport at a desired scale.
+// Freeze the viewport at a desired scale.
 viewport.freeze(1.0, () => console.log("notified when frozen!"));
 
 // Restore the viewport to what it was before freezing.
