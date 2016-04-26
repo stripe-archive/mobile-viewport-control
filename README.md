@@ -48,23 +48,28 @@ Compatibility is measured with a combination of automatic/manual testing:
   1. Manual step - pinch-zoom before starting the test
   1. Manual step - verify that you can still pinch-zoom after the test
 
-| Mobile Browser             | [Measure Test]\* | [Freeze Test]                             | [Thaw Test]           |
-|----------------------------|------------------|-------------------------------------------|-----------------------|
-| iOS Safari                 | Y                | Y                                         | Y                     |
-| iOS UIWebView              | Y                | Fails if user manually zoomed beforehand. | Y if freeze succeeds. |
-| iOS WKWebView              | Y                | Y                                         | Y                     |
-| iOS SFSafariViewController | Y                | Y                                         | Y                     |
-| iOS Chrome                 | Y                | Y                                         | Y                     |
-| iOS Firefox                | Y                | Y                                         | Y                     |
-| iOS Opera Mini             | Y                | Fails if user manually zoomed beforehand. | Y if freeze succeeds. |
-| Android Browser (Stock)    |                  |                                           |                       |
-| Android Chrome             |                  |                                           |                       |
-| Android WebView            |                  |                                           |                       |
-| Android Chrome Custom Tabs |                  |                                           |                       |
-| Android Firefox            |                  |                                           |                       |
-| Android Opera Mini         |                  |                                           |                       |
+| Mobile Browser             | [Measure Test]\* | [Freeze Test]           | [Thaw Test]           |
+|----------------------------|------------------|-------------------------|-----------------------|
+| iOS Safari                 | Y                | Y                       | Y                     |
+| iOS UIWebView              | Y                | Fails if user pinch-zooms after page load\*\* | Y if freeze succeeds. |
+| iOS WKWebView              | Y                | Y                       | Y                     |
+| iOS SFSafariViewController | Y                | Y                       | Y                     |
+| iOS Chrome                 | Y                | Y                       | Y                     |
+| iOS Firefox                | Y                | Y                       | Y                     |
+| iOS Opera Mini             | Y                | Fails if user pinch-zooms after page load\*\* | Y if freeze succeeds. |
+| Android Browser (Stock)    |                  |                         |                       |
+| Android Chrome             |                  |                         |                       |
+| Android WebView            |                  |                         |                       |
+| Android Chrome Custom Tabs |                  |                         |                       |
+| Android Firefox            |                  |                         |                       |
+| Android Opera Mini         |                  |                         |                       |
 
-_\* This test fails in the iOS Simulator because initial-scale is ignored there for wide pages for some reason._
+_\* This test fails in the iOS Simulator because `initial-scale` is ignored
+there for wide pages for some reason._
+
+_\*\* Pinch-zooming causes the page's scale to change from its specified
+`initial-scale`.  This custom zoom level is maintained across refreshes.  When
+opening in a new tab, the `initial-scale` is resumed._
 
 [Measure Test]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure.html
 [Freeze Test]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze.html
