@@ -54,9 +54,9 @@ Compatibility is measured with a combination of automatic/manual testing:
 | iOS UIWebView              | Y                | Fails if user manually zoomed beforehand. | Y if freeze succeeds |
 | iOS WKWebView              | Y                | Y                                         | Y                    |
 | iOS SFSafariViewController | Y                | Y                                         | Y                    |
-| iOS Chrome                 | Y                |                                           |                      |
-| iOS Firefox                | Y                |                                           |                      |
-| iOS Opera Mini             | Y                |                                           |                      |
+| iOS Chrome                 | Y                | Y                                         |                      |
+| iOS Firefox                | Y                | Y                                         |                      |
+| iOS Opera Mini             | Y                | Fails if user manually zoomed beforehand. |                      |
 | Android Browser (Stock)    |                  |                                           |                      |
 | Android Chrome             |                  |                                           |                      |
 | Android WebView            |                  |                                           |                      |
@@ -66,9 +66,9 @@ Compatibility is measured with a combination of automatic/manual testing:
 
 _\* This test fails in the iOS Simulator because initial-scale is ignored there for wide pages for some reason._
 
-[Measure Test]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure
-[Freeze Test]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze
-[Thaw Test]:http://shaunstripe.github.io/mobileViewportControl/test/03-thaw
+[Measure Test]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure.html
+[Freeze Test]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze.html
+[Thaw Test]:http://shaunstripe.github.io/mobileViewportControl/test/03-thaw.html
 
 ### Variables
 
