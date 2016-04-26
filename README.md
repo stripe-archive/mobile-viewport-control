@@ -11,6 +11,26 @@ The goal of this project is to measure the degree at which different mobile
 browsers are receptive to us _modifying_ the viewport at runtime, and to pursue
 a universal method for doing so.
 
+## Usage
+
+```
+npm install mobileViewportControl
+```
+
+```js
+const viewport = require('mobileViewportControl');
+
+// Dynamically freeze the viewport at a desired scale.
+viewport.freeze(1.0, () => console.log("notified when frozen!"));
+
+// Restore the viewport to what it was before freezing.
+viewport.thaw(() => console.log("notified when thawed!"));
+```
+
+## Compatibility
+
+...
+
 ## Background
 
 Quirksmode offers full descriptions on what is known about mobile viewports:
