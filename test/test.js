@@ -18,20 +18,15 @@ if (window.runBtn) {
 }
 
 function assert(test) {
+  globalTest.cases.push(test);
+
   var isExact = test.actual === test.expected;
   var isClose = Math.abs(test.actual - test.expected) < globalTest.epsilon;
 
   test.success = isClose;
+
   if (test.success) {
     globalTest.totalPass++;
-  }
-
-  globalTest.success &= test.success;
-  globalTest.cases.push(test);
-
-  document.body.style.background = globalTest.success ? "#0F0" : "#F00";
-
-  if (test.success) {
     resultDiv.innerHTML += (
       "<div>"+
       "&#x2714; "+test.name+" is "+test.expected+
@@ -40,6 +35,8 @@ function assert(test) {
     );
   }
   else {
+    globalTest.success = false;
+    document.body.style.background = "#F00";
     resultDiv.innerHTML += (
       "<div>"+
       "&#x2718; "+test.name+"<br>"+
@@ -59,6 +56,9 @@ function log(msg) {
 }
 
 function finishTesting() {
+  if (globalTest.success) {
+    document.body.style.background = "#0F0";
+  }
   resultDiv.innerHTML += (
     (globalTest.success ? "SUCCESS" : "FAILED") +
     " (" + globalTest.totalPass + "/" + globalTest.cases.length + " passed)"
