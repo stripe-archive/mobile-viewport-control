@@ -29,7 +29,19 @@ viewport.thaw(() => console.log("notified when thawed!"));
 
 ## Compatibility
 
-...
+| Mobile Browser             | Freeze?             | Thaw?               |
+|----------------------------|---------------------|---------------------|
+| iOS Safari                 |                     |                     |
+| iOS UIWebView              |                     |                     |
+| iOS WKWebView              |                     |                     |
+| iOS SFSafariViewController |                     |                     |
+| iOS Chrome                 |                     |                     |
+| iOS Firefox                |                     |                     |
+| Android Browser (Stock)    |                     |                     |
+| Android Chrome             |                     |                     |
+| Android WebView            |                     |                     |
+| Android Chrome Custom Tabs |                     |                     |
+| Android Firefox            |                     |                     |
 
 ## Background
 
@@ -86,19 +98,3 @@ Open these in a mobile browser to test.
 - [test 03b](http://shaunstripe.github.io/mobileViewportControl/test/03b)
 - [test 03c](http://shaunstripe.github.io/mobileViewportControl/test/03c)
 - [test main](http://shaunstripe.github.io/mobileViewportControl/test/main)
-
-## Target Browsers
-
-- iOS
-  - Web Views
-    - UIWebView
-    - WKWebView
-    - SFSafariViewController
-  - Mobile Safari
-  - Chrome
-  - Firefox
-- Android
-  - Web View
-  - Chrome
-  - Native Browser
-  - Firefox
