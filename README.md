@@ -58,11 +58,11 @@ Compatibility is measured with a combination of automatic/manual testing:
 | iOS Firefox                | Y                | Y                                             | Y                     |
 | iOS Opera Mini             | Y                | Fails if user pinch-zooms before freezing\*\* | Y if freeze succeeds. |
 | Android Browser (Stock)    |                  |                                               |                       |
-| Android Chrome             |                  |                                               |                       |
-| Android WebView            |                  |                                               |                       |
-| Android Chrome Custom Tabs |                  |                                               |                       |
-| Android Firefox            |                  |                                               |                       |
-| Android Opera Mini         |                  |                                               |                       |
+| Android Chrome             | Y                | Y                                             | Y                     |
+| Android WebView            | Y                | Y                                             | Y                     |
+| Android Chrome Custom Tabs | Y                | Y                                             | Y                     |
+| Android Firefox            | Y                | Fails                                         | Fails                 |
+| Android Opera Mini         | Fails            | Fails                                         | Fails                 |
 
 _\* This test fails in the iOS Simulator because `initial-scale` is ignored
 there for wide pages for some reason._
