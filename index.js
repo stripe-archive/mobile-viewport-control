@@ -171,6 +171,7 @@ function thaw(onDone, extras) {
 }
 
 return {
+  version: '0.1.0',
   getScale: getScale,
   freeze: freeze,
   thaw: thaw
