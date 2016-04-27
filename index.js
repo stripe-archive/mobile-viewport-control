@@ -143,11 +143,12 @@ function thaw(onDone, testEvts) {
 
     // Restore the page's zoom bounds.
     hook.setAttribute('content', [
+      (initial.width ? ('width=' + initial.width) : null),
       'user-scalable='+initial['user-scalable'],
       'initial-scale='+originalScale,
       'minimum-scale='+initial['minimum-scale'],
       'maximum-scale='+initial['maximum-scale']
-    ].join(','));
+    ].filter(Boolean).join(','));
 
     setTimeout(function(){
       if (testEvts && testEvts.onRestoreBounds)
