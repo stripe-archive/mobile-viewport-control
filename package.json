@@ -1,0 +1,12 @@
+{
+  "name": "mobile-viewport-control",
+  "version": "0.1.0",
+  "description": "Dynamically control the mobile viewport",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaunstripe/mobile-viewport-control.git"
+  },
+  "author": "Shaun Williams",
+  "license": "ISC"
+}

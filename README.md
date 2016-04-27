@@ -23,11 +23,11 @@ native app.
 ## Usage
 
 ```
-npm install mobileViewportControl
+npm install mobile-viewport-control
 ```
 
 ```js
-const viewport = require('mobileViewportControl');
+const viewport = require('mobile-viewport-control');
 
 // Freeze the viewport at a desired scale.
 viewport.freeze(1.0, () => console.log("notified when frozen!"));
@@ -89,3 +89,6 @@ We currently do not test all variables, but the test outcomes depend on the foll
   - manual zoom after page load and before test run
 - initial zoom bounds (controlled by page's original viewport meta tags)
 
+## License
+
+[ISC License](LICENSE)
