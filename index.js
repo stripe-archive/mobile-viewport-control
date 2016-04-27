@@ -173,6 +173,7 @@ function thaw(onDone, testEvts) {
 
 return {
   version: '0.1.0',
+  getInitialViewport: getInitialViewport,
   getScale: getScale,
   freeze: freeze,
   thaw: thaw
