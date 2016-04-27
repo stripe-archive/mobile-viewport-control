@@ -28,6 +28,8 @@ npm install mobile-viewport-control
 
 ```js
 const viewport = require('mobile-viewport-control');
+// ... or use `window.mobileViewportControl` if not used with package manager
+
 
 // Freeze the viewport at a desired scale.
 viewport.freeze(1.0, () => console.log("notified when frozen!"));
