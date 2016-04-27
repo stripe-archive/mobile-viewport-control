@@ -73,9 +73,9 @@ _\*\* Pinch-zooming causes the page's scale to change from its specified
 `initial-scale`.  This custom zoom level is maintained across refreshes.  When
 opening in a new tab, the `initial-scale` is resumed._
 
-[Measure Test]:http://shaunstripe.github.io/mobileViewportControl/test/01-measure.html
-[Freeze Test]:http://shaunstripe.github.io/mobileViewportControl/test/02-freeze.html
-[Thaw Test]:http://shaunstripe.github.io/mobileViewportControl/test/03-thaw.html
+[Measure Test]:http://shaunstripe.github.io/mobile-viewport-control/test/01-measure.html
+[Freeze Test]:http://shaunstripe.github.io/mobile-viewport-control/test/02-freeze.html
+[Thaw Test]:http://shaunstripe.github.io/mobile-viewport-control/test/03-thaw.html
 
 ### Variables
 
