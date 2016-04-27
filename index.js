@@ -122,7 +122,7 @@ function freeze(scale, onDone) {
 
 // Thaw the viewport, restoring the scale and scroll to what it
 // was before freezing.
-function thaw(onDone, extras) {
+function thaw(onDone, testEvts) {
   var hook = document.getElementById(hookID);
   if (!hook) {
     return;
@@ -138,8 +138,8 @@ function thaw(onDone, extras) {
   ].join(','));
 
   setTimeout(function() {
-    if (extras.onRestoreScale)
-      extras.onRestoreScale();
+    if (testEvts && testEvts.onRestoreScale)
+      testEvts.onRestoreScale();
 
     // Restore the page's zoom bounds.
     hook.setAttribute('content', [
@@ -150,8 +150,8 @@ function thaw(onDone, extras) {
     ].join(','));
 
     setTimeout(function(){
-      if (extras.onRestoreBounds)
-        extras.onRestoreBounds();
+      if (testEvts && testEvts.onRestoreBounds)
+        testEvts.onRestoreBounds();
 
       // Remove our meta viewport hook.
       document.head.removeChild(hook);
@@ -160,8 +160,8 @@ function thaw(onDone, extras) {
       // so we have to do this last.
       setScroll(originalScroll);
 
-      if (extras.onRestoreScroll)
-        extras.onRestoreScroll();
+      if (testEvts && testEvts.onRestoreScroll)
+        testEvts.onRestoreScroll();
 
       if (onDone)
         onDone();
