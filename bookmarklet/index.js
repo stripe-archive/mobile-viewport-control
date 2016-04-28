@@ -1,5 +1,7 @@
 // Just export to window object for bookmarklet
-window.mobileViewportControl = (function(){
+(function (root, factory) {
+  root.mobileViewportControl = factory();
+}(this, function() {
 
 // Getting/Setting Scroll position
 
@@ -160,4 +162,4 @@ return {
   thaw: thaw
 };
 
-}()); // end module scope
+})); // end module scope
