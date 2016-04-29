@@ -105,6 +105,10 @@ function getScale() {
 // to hook into and control the viewport.
 var hookID = '__mobileViewportControl_hook__';
 
+// A unique ID of the CSS style tag we must create to
+// add rules for hiding the body.
+var styleID = '__mobileViewPortControl_style__';
+
 // An empirical guess for the maximum time that we have to
 // wait before we are confident a viewport change has registered.
 var refreshDelay = 200;
@@ -114,7 +118,7 @@ var originalScale;
 var originalScroll;
 
 // Classes we use to make our body selector specific enough
-// to hopefully override other selectors.
+// to hopefully override all other selectors.
 // (mvc__ = mobileViewportControl prefix for uniqueness)
 var hiddenBodyClasses = [
   'mvc__a',
@@ -137,9 +141,11 @@ var hiddenBodyClasses = [
 function isolatedStyle(elementID) {
   var classes = hiddenBodyClasses.join('.');
   return [
+    // hide everything in the body...
     'body.' + classes + ' > * {',
     '  display: none !important',
     '}',
+    // ...except the given element ID
     'body.' + classes + ' > #' + elementID + ' {',
     '  display: block !important',
     '}'
@@ -147,13 +153,26 @@ function isolatedStyle(elementID) {
 }
 
 function isolate(elementID) {
-  // add classes to body tag
-  // add styling
+  // add classes to body tag to isolate all other elements
+  var classes = hiddenBodyClasses.join(' ');
+  document.body.className += ' ' + classes;
+
+  // add isolating style rules
+  var style = document.createElement('style');
+  style.id = styleID;
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode(isolatedStyle(elementID)));
+  document.head.appendChild(style);
 }
 
-function undoIsolate(elementID) {
-  // remove classes from body tag
-  // remove styling
+function undoIsolate() {
+  // remove isolating classes from body tag
+  var classes = hiddenBodyClasses.join(' ');
+  document.body.className = document.body.className.replace(classes, '');
+
+  // remove isolating style rules
+  var style = document.getElementById(styleID);
+  document.head.removeChild(style);
 }
 
 //---------------------------------------------------------------------------
@@ -161,7 +180,20 @@ function undoIsolate(elementID) {
 //---------------------------------------------------------------------------
 
 // Freeze the viewport to a given scale.
-function freeze(scale, onDone) {
+function freeze(scale) {
+  // optional arguments
+  var isolateID, onDone;
+
+  // get optional arguments using their type
+  var args = Array.prototype.slice.call(arguments, 1);
+  if (typeof args[0] === 'string') {
+    isolateID = args[0];
+    args.splice(0, 1);
+  }
+  if (typeof args[0] === 'function') {
+    onDone = args[0];
+  }
+
   var hook = document.getElementById(hookID);
   if (!hook) {
     originalScale = getScale();
