@@ -117,10 +117,10 @@ var refreshDelay = 200;
 var originalScale;
 var originalScroll;
 
-// Classes we use to make our body selector specific enough
+// Classes we use to make our css selector specific enough
 // to hopefully override all other selectors.
 // (mvc__ = mobileViewportControl prefix for uniqueness)
-var hiddenBodyClasses = [
+var hiddenClasses = [
   'mvc__a',
   'mvc__lot',
   'mvc__of',
@@ -139,23 +139,36 @@ var hiddenBodyClasses = [
 //---------------------------------------------------------------------------
 
 function isolatedStyle(elementID) {
-  var classes = hiddenBodyClasses.join('.');
+  var classes = hiddenClasses.join('.');
   return [
+    // We effectively clear the <html> and <body> background
+    // and sizing attributes.
+    'html.' + classes + ',',
+    'html.' + classes + ' > body {',
+    '  background: #fff;',
+    '  width: auto;',
+    '  min-width: auto;',
+    '  max-width: auto;',
+    '  height: auto;',
+    '  min-height: auto;',
+    '  max-height: auto;',
+    '}',
     // hide everything in the body...
-    'body.' + classes + ' > * {',
-    '  display: none !important',
+    'html.' + classes + ' > body > * {',
+    '  display: none !important;',
     '}',
     // ...except the given element ID
-    'body.' + classes + ' > #' + elementID + ' {',
-    '  display: block !important',
+    'html.' + classes + ' > body > #' + elementID + ' {',
+    '  display: block !important;',
     '}'
   ].join('\n');
 }
 
 function isolate(elementID) {
   // add classes to body tag to isolate all other elements
-  var classes = hiddenBodyClasses.join(' ');
-  document.body.className += ' ' + classes;
+  var classes = hiddenClasses.join(' ');
+  var html = document.documentElement;
+  html.className += ' ' + classes;
 
   // add isolating style rules
   var style = document.createElement('style');
@@ -167,8 +180,9 @@ function isolate(elementID) {
 
 function undoIsolate() {
   // remove isolating classes from body tag
-  var classes = hiddenBodyClasses.join(' ');
-  document.body.className = document.body.className.replace(classes, '');
+  var classes = hiddenClasses.join(' ');
+  var html = document.documentElement;
+  html.className = html.className.replace(classes, '');
 
   // remove isolating style rules
   var style = document.getElementById(styleID);
