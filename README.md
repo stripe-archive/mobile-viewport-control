@@ -32,10 +32,19 @@ const viewport = require('mobile-viewport-control');
 
 
 // Freeze the viewport at a desired scale.
-viewport.freeze(1.0, () => console.log("notified when frozen!"));
+viewport.freeze(1.0, () => console.log('notified when frozen!'));
 
 // Restore the viewport to what it was before freezing.
-viewport.thaw(() => console.log("notified when thawed!"));
+viewport.thaw(() => console.log('notified when thawed!'));
+```
+
+Additionally, to freeze the scroll area to a given element, you can pass an
+element ID as the second argument.  We do this by temporarily hiding everything
+else on the page.  Just make sure your element is a direct child of
+`document.body`.
+
+```js
+viewport.freeze(1.0, 'myElementID');
 ```
 
 ## Try it on Existing Web Pages

@@ -284,9 +284,13 @@ function thaw(onDone, testEvts) {
 //---------------------------------------------------------------------------
 
 return {
-  version: '0.1.1',
   getInitialViewport: getInitialViewport,
   getScale: getScale,
+  isolate: isolate,
+  undoIsolate: undoIsolate,
+
+  // stable
+  version: '0.1.1',
   freeze: freeze,
   thaw: thaw
 };
