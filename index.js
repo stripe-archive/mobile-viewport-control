@@ -10,7 +10,7 @@
 // JS Module Boilerplate
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define([], factory);
+    define('mobile-viewport-control', [], factory);
   }
   else if (typeof module === 'object' && module.exports) {
     module.exports = factory();
