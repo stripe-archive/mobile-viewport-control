@@ -7,7 +7,10 @@
 // GitHub: https://github.com/shaunstripe/mobile-viewport-control
 //
 
+//---------------------------------------------------------------------------
 // JS Module Boilerplate
+//---------------------------------------------------------------------------
+
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define('mobile-viewport-control', [], factory);
@@ -20,7 +23,9 @@
   }
 }(this, function() {
 
+//---------------------------------------------------------------------------
 // Getting/Setting Scroll position
+//---------------------------------------------------------------------------
 
 function getScroll() {
   return {
@@ -34,43 +39,10 @@ function setScroll(scroll) {
   document.body.scrollTop = scroll.top;
 }
 
-// Calculating current scale
-// simplified from: http://menacingcloud.com/?c=viewportScale
-
-function getOrientation() {
-  var degrees = window.orientation;
-  var w = document.documentElement.clientWidth;
-  var h = document.documentElement.clientHeight;
-  if(degrees === undefined) {
-    return (w > h) ? 'landscape' : 'portrait';
-  }
-  return (degrees % 180 === 0) ? 'portrait' : 'landscape';
-}
-
-function getOrientedScreenWidth() {
-  var orientation = getOrientation();
-  var sw = screen.width;
-  var sh = screen.height;
-  return (orientation === 'portrait') ? Math.min(sw,sh) : Math.max(sw,sh);
-}
-
-function getScale() {
-  var visualViewportWidth = window.innerWidth;
-  var screenWidth = getOrientedScreenWidth();
-  return screenWidth / visualViewportWidth;
-}
-
-// A unique ID of the meta-viewport tag we must create
-// to hook into and control the viewport.
-var hookID = '__mobileViewportControl_hook__';
-
-// An empirical guess for the maximum time that we have to
-// wait before we are confident a viewport change has registered.
-var refreshDelay = 200;
-
-// Original viewport state before freezing.
-var originalScale;
-var originalScroll;
+//---------------------------------------------------------------------------
+// Getting Initial Viewport from <meta name='viewport'> tags
+// but we also include implicit defaults.
+//---------------------------------------------------------------------------
 
 function getInitialViewport() {
   // These seem to be the defaults
@@ -96,6 +68,97 @@ function getInitialViewport() {
   }
   return viewport;
 }
+
+//---------------------------------------------------------------------------
+// Calculating current viewport scale
+// simplified from: http://menacingcloud.com/?c=viewportScale
+//---------------------------------------------------------------------------
+
+function getOrientation() {
+  var degrees = window.orientation;
+  var w = document.documentElement.clientWidth;
+  var h = document.documentElement.clientHeight;
+  if(degrees === undefined) {
+    return (w > h) ? 'landscape' : 'portrait';
+  }
+  return (degrees % 180 === 0) ? 'portrait' : 'landscape';
+}
+
+function getOrientedScreenWidth() {
+  var orientation = getOrientation();
+  var sw = screen.width;
+  var sh = screen.height;
+  return (orientation === 'portrait') ? Math.min(sw,sh) : Math.max(sw,sh);
+}
+
+function getScale() {
+  var visualViewportWidth = window.innerWidth;
+  var screenWidth = getOrientedScreenWidth();
+  return screenWidth / visualViewportWidth;
+}
+
+//---------------------------------------------------------------------------
+// State and Constants
+//---------------------------------------------------------------------------
+
+// A unique ID of the meta-viewport tag we must create
+// to hook into and control the viewport.
+var hookID = '__mobileViewportControl_hook__';
+
+// An empirical guess for the maximum time that we have to
+// wait before we are confident a viewport change has registered.
+var refreshDelay = 200;
+
+// Original viewport state before freezing.
+var originalScale;
+var originalScroll;
+
+// Classes we use to make our body selector specific enough
+// to hopefully override other selectors.
+// (mvc__ = mobileViewportControl prefix for uniqueness)
+var hiddenBodyClasses = [
+  'mvc__a',
+  'mvc__lot',
+  'mvc__of',
+  'mvc__classes',
+  'mvc__to',
+  'mvc__increase',
+  'mvc__the',
+  'mvc__odds',
+  'mvc__of',
+  'mvc__winning',
+  'mvc__specificity'
+];
+
+//---------------------------------------------------------------------------
+// Isolating an Element
+//---------------------------------------------------------------------------
+
+function isolatedStyle(elementID) {
+  var classes = hiddenBodyClasses.join('.');
+  return [
+    'body.' + classes + ' > * {',
+    '  display: none !important',
+    '}',
+    'body.' + classes + ' > #' + elementID + ' {',
+    '  display: block !important',
+    '}'
+  ].join('\n');
+}
+
+function isolate(elementID) {
+  // add classes to body tag
+  // add styling
+}
+
+function undoIsolate(elementID) {
+  // remove classes from body tag
+  // remove styling
+}
+
+//---------------------------------------------------------------------------
+// Freezing and Thawing
+//---------------------------------------------------------------------------
 
 // Freeze the viewport to a given scale.
 function freeze(scale, onDone) {
@@ -170,6 +233,10 @@ function thaw(onDone, testEvts) {
     }, refreshDelay);
   }, refreshDelay);
 }
+
+//---------------------------------------------------------------------------
+// Public API
+//---------------------------------------------------------------------------
 
 return {
   version: '0.1.1',
