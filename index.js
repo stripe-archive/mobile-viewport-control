@@ -194,6 +194,12 @@ function freeze(scale) {
     onDone = args[0];
   }
 
+  // isolate element if needed
+  if (isolateID) {
+    isolate(isolateID);
+  }
+
+  // freeze viewport
   var hook = document.getElementById(hookID);
   if (!hook) {
     originalScale = getScale();
@@ -218,6 +224,13 @@ function freeze(scale) {
 // Thaw the viewport, restoring the scale and scroll to what it
 // was before freezing.
 function thaw(onDone, testEvts) {
+  // restore body visibility
+  var style = document.getElementById(styleID);
+  if (style) {
+    undoIsolate();
+  }
+
+  // exit if there is nothing to thaw
   var hook = document.getElementById(hookID);
   if (!hook) {
     return;
