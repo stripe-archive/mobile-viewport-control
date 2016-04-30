@@ -50,7 +50,8 @@ viewport.freeze(1.0, 'myElementID');
 ## Try it on Existing Web Pages
 
 Test on arbitrary web pages with the following bookmarklet.  It will freeze
-the viewport scale and thaw it 5 seconds after:
+the viewport scale, show a custom isolated element, and allow you to press
+a button to restore the view.
 
 ```
 javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/index.js?'+Math.random();document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet.js?'+Math.random();}())
