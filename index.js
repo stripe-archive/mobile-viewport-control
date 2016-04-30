@@ -1,5 +1,5 @@
 //
-// Mobile Viewport Control v0.1.1
+// Mobile Viewport Control v0.2.0
 //
 // Copyright (c) 2016 Shaun Williams
 // ISC License
@@ -307,7 +307,7 @@ return {
   undoIsolate: undoIsolate,
 
   // stable
-  version: '0.1.1',
+  version: '0.2.0',
   freeze: freeze,
   thaw: thaw
 };
