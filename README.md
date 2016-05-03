@@ -142,6 +142,13 @@ We currently do not test all variables, but the test outcomes depend on the foll
   - manual zoom after page load and before test run
 - initial zoom bounds (controlled by page's original viewport meta tags)
 
+### Quirks when Dynamically Modifying Viewport
+
+- iOS UIWebView does not allow scale adjustments after the user has manually adjusted it.
+- Android does not register a new viewport meta tag if it is immediately removed after creation.
+- Android will modify the scroll some time after a new viewport tag is registered.
+- Android (at least in Chrome) will not freeze scale at 1.0, but will at 1.0±ε for some ε>0.
+
 ## License
 
 [ISC License](LICENSE)
