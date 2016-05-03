@@ -44,13 +44,18 @@ function setScroll(scroll) {
 // but we also include implicit defaults.
 //---------------------------------------------------------------------------
 
-function getInitialViewport() {
-  // These seem to be the defaults
-  var viewport = {
-    'user-scalable': 'yes',
-    'minimum-scale': '0',
-    'maximum-scale': '10'
-  };
+function getInitialViewport(withDefaults) {
+  var viewport = {};
+
+  if (withDefaults) {
+    // These seem to be the defaults
+    viewport = {
+      'user-scalable': 'yes',
+      'minimum-scale': '0',
+      'maximum-scale': '10'
+    };
+  }
+
   var tags = document.querySelectorAll('meta[name=viewport]');
   var i,j,tag,content,keyvals,keyval;
   for (i=0; i<tags.length; i++) {
@@ -259,7 +264,7 @@ function thaw(onDone, testEvts) {
     return;
   }
 
-  var initial = getInitialViewport();
+  var initial = getInitialViewport(true);
 
   // VIEWPORT RESTORATION seems to have to be done in a certain order,
   // with some pauses in between to allow them to properly register.
