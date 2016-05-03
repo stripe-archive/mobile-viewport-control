@@ -255,7 +255,18 @@ function thaw(onDone, testEvts) {
 
   var initial = getInitialViewport();
 
-  // Restore the user's manual zoom.
+  // VIEWPORT RESTORATION seems to have to be done in a certain order,
+  // with some pauses in between to allow them to properly register.
+  //
+  // 1. Restore the user's manual zoom.
+  // 2. Restore the page's zoom bounds.
+  // 3. Restore the viewport size.
+  // 4. Restore the viewport position (scroll).
+  //
+  // (Steps are listed individually below)
+
+
+  // 1. Restore the user's manual zoom.
   hook.setAttribute('content', [
     'initial-scale='+originalScale,
     'minimum-scale='+originalScale,
@@ -266,32 +277,39 @@ function thaw(onDone, testEvts) {
     if (testEvts && testEvts.onRestoreScale)
       testEvts.onRestoreScale();
 
-    // Restore the page's zoom bounds.
+    // 2. Restore the page's zoom bounds.
     hook.setAttribute('content', [
-      (initial.width ? ('width=' + initial.width) : null),
       'user-scalable='+initial['user-scalable'],
       'initial-scale='+originalScale,
       'minimum-scale='+initial['minimum-scale'],
       'maximum-scale='+initial['maximum-scale']
-    ].filter(Boolean).join(','));
+    ].join(','));
 
     setTimeout(function(){
       if (testEvts && testEvts.onRestoreBounds)
         testEvts.onRestoreBounds();
 
-      // Remove our meta viewport hook.
-      document.head.removeChild(hook);
+      // 3. Restore the viewport size.
+      if (initial.width) {
+        hook.setAttribute('content', [
+          'width='+initial['width']
+        ].join(','));
+      }
 
-      // Updating the viewport can change scroll,
-      // so we have to do this last.
-      setScroll(originalScroll);
+      setTimeout(function() {
+        // Remove our meta viewport hook.
+        document.head.removeChild(hook);
 
-      if (testEvts && testEvts.onRestoreScroll)
-        testEvts.onRestoreScroll();
+        // 4. Restore the viewport position (scroll).
+        setScroll(originalScroll);
 
-      if (onDone)
-        onDone();
+        if (testEvts && testEvts.onRestoreScroll)
+          testEvts.onRestoreScroll();
 
+        if (onDone)
+          onDone();
+
+      }, refreshDelay);
     }, refreshDelay);
   }, refreshDelay);
 }
