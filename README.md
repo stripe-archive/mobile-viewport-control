@@ -76,7 +76,7 @@ Compatibility is measured with a combination of automatic/manual testing:
 | Android Chrome             | Y                | Y             | Y                  | devtools or bookmarklet  |
 | Android WebView            | Y                | Y             | Y                  | devtools                 |
 | Android Chrome Custom Tabs | Y                | Y             | Y                  |                          |
-| Android Firefox            | Y                | Fails         | Fails              | bookmarklet              |
+| Android Firefox            | Y                | Fails         | Fails              | devtools or bookmarklet  |
 | Android Opera Mini         | Fails            | Fails         | Fails              |                          |
 
 _\* This test fails in the iOS Simulator because `initial-scale` is ignored
