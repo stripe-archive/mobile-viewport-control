@@ -109,7 +109,7 @@ The following bookmarklet will freeze the viewport scale, show a custom
 isolated element, and allow you to press a button to restore the view.
 
 ```js
-javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/index.js?'+Math.random();document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet.js?'+Math.random();}())
+javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/bookmarklet.js?'+Math.random();}())
 ```
 
 ##### With DevTools
@@ -121,8 +121,7 @@ Chrome/webview can connect to Desktop Chrome DevTools.  Inside DevTools, we can
 simply paste the body of the bookmarklet inside the JS console:
 
 ```js
-document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/index.js?'+Math.random();
-document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet.js?'+Math.random();
+document.body.appendChild(document.createElement('script')).src='https://cdn.rawgit.com/shaunstripe/mobile-viewport-control/master/bookmarklet.js?'+Math.random();
 ```
 
 iOS webviews require an extra step: you must run an webview app from a live
