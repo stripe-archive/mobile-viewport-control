@@ -217,6 +217,12 @@ function freeze(scale) {
     isolate(isolateID);
   }
 
+  // validate scale
+  // (we cannot freeze scale at 1.0 on Android)
+  if (scale === 1) {
+    scale = 1.002;
+  }
+
   // freeze viewport
   var hook = document.getElementById(hookID);
   if (!hook) {
