@@ -217,9 +217,14 @@ function freeze(scale) {
     onDone = args[0];
   }
 
+  // save original viewport state
+  originalScroll = getScroll();
+  originalScale = getScale();
+
   // isolate element if needed
   if (isolateID) {
     isolate(isolateID);
+    setScroll({x:0,y:0});
   }
 
   // validate scale
@@ -228,21 +233,27 @@ function freeze(scale) {
     scale = 1.002;
   }
 
-  // freeze viewport
+  // add our new meta viewport tag
   var hook = document.getElementById(hookID);
   if (!hook) {
-    originalScale = getScale();
-    originalScroll = getScroll();
     hook = document.createElement('meta');
     hook.id = hookID;
     hook.name = 'viewport';
     document.head.appendChild(hook);
   }
+
+  // When freezing the viewport, we still enable
+  // user-scalability and allow a tight zooming
+  // margin.  Without this, UIWebView would simply
+  // ignore attempts to set the scale.  But with this
+  // solution, the next time the user pinch-zooms
+  // in this state, the viewport will auto-snap
+  // to our scale.
   hook.setAttribute('content', [
-    'user-scalable=no',
+    'user-scalable=yes',
     'initial-scale='+scale,
     'minimum-scale='+scale,
-    'maximum-scale='+scale
+    'maximum-scale='+(scale+0.004)
   ].join(','));
 
   if (onDone) {
