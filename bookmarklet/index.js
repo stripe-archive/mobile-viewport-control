@@ -103,6 +103,24 @@ function getScale() {
   return screenWidth / visualViewportWidth;
 }
 
+
+//---------------------------------------------------------------------------
+// Get mobile OS
+// from: http://stackoverflow.com/a/21742107
+//---------------------------------------------------------------------------
+
+function getMobileOS() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  if (userAgent.match(/iPad/i) ||
+      userAgent.match(/iPhone/i) ||
+      userAgent.match(/iPod/i)) {
+    return 'iOS';
+  }
+  else if (userAgent.match(/Android/i)) {
+    return 'Android';
+  }
+}
+
 //---------------------------------------------------------------------------
 // State and Constants
 //---------------------------------------------------------------------------
@@ -199,7 +217,7 @@ function undoIsolate() {
 }
 
 //---------------------------------------------------------------------------
-// Freezing and Thawing
+// Freezing
 //---------------------------------------------------------------------------
 
 // Freeze the viewport to a given scale.
@@ -261,6 +279,56 @@ function freeze(scale) {
   }
 }
 
+//---------------------------------------------------------------------------
+// Thawing
+//---------------------------------------------------------------------------
+
+function thawIOS(hook, initial, onDone, testEvts) {
+
+  // Restore the user's manual zoom.
+  hook.setAttribute('content', [
+    'initial-scale='+originalScale,
+    'minimum-scale='+originalScale,
+    'maximum-scale='+originalScale
+  ].join(','));
+
+  // Restore the page's zoom bounds.
+  hook.setAttribute('content', [
+    'user-scalable='+initial['user-scalable'],
+    'minimum-scale='+initial['minimum-scale'],
+    'maximum-scale='+initial['maximum-scale'],
+    (initial.width ? 'width='+initial.width : null)
+  ].filter(Boolean).join(','));
+
+  // Remove our meta viewport hook.
+  document.head.removeChild(hook);
+
+  setScroll(originalScroll);
+
+  setTimeout(function() {
+    if (onDone)
+      onDone();
+  }, refreshDelay);
+}
+
+function thawAndroid(hook, initial, onDone, testEvts) {
+  hook.setAttribute('content', [
+    'user-scalable='+initial['user-scalable'],
+    'initial-scale='+originalScale,
+    'minimum-scale='+initial['minimum-scale'],
+    'maximum-scale='+initial['maximum-scale'],
+    (initial.width ? 'width='+initial.width : null)
+  ].filter(Boolean).join(','));
+
+  setScroll(originalScroll);
+
+  setTimeout(function(){
+    document.head.removeChild(hook);
+    if (onDone)
+      onDone();
+  }, refreshDelay);
+}
+
 // Thaw the viewport, restoring the scale and scroll to what it
 // was before freezing.
 function thaw(onDone, testEvts) {
@@ -278,31 +346,17 @@ function thaw(onDone, testEvts) {
 
   var initial = getInitialViewport(true);
 
-  if (testEvts && testEvts.onRestoreScale)
-    testEvts.onRestoreScale();
-
-  hook.setAttribute('content', [
-    'user-scalable='+initial['user-scalable'],
-    'initial-scale='+originalScale,
-    'minimum-scale='+initial['minimum-scale'],
-    'maximum-scale='+initial['maximum-scale'],
-    (initial.width ? 'width='+initial.width : null)
-  ].filter(Boolean).join(','));
-
-  setScroll(originalScroll);
-
-  setTimeout(function(){
-    if (testEvts && testEvts.onRestoreBounds)
-      testEvts.onRestoreBounds();
-
-    document.head.removeChild(hook);
-
-    if (testEvts && testEvts.onRestoreScroll)
-      testEvts.onRestoreScroll();
-
-    if (onDone)
-      onDone();
-  }, refreshDelay);
+  var os = getMobileOS();
+  if (os === 'iOS') {
+    thawIOS(hook, initial, onDone, testEvts);
+  }
+  else if (os === 'Android') {
+    thawAndroid(hook, initial, onDone, testEvts);
+  }
+  else {
+    // For other browsers, we just try Android's method.
+    thawAndroid(hook, initial, onDone, testEvts);
+  }
 }
 
 //---------------------------------------------------------------------------
