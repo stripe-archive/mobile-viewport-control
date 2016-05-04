@@ -278,62 +278,30 @@ function thaw(onDone, testEvts) {
 
   var initial = getInitialViewport(true);
 
-  // VIEWPORT RESTORATION seems to have to be done in a certain order,
-  // with some pauses in between to allow them to properly register.
-  //
-  // 1. Restore the user's manual zoom.
-  // 2. Restore the page's zoom bounds.
-  // 3. Restore the viewport size.
-  // 4. Restore the viewport position (scroll).
-  //
-  // (Steps are listed individually below)
+  if (testEvts && testEvts.onRestoreScale)
+    testEvts.onRestoreScale();
 
-
-  // 1. Restore the user's manual zoom.
   hook.setAttribute('content', [
+    'user-scalable='+initial['user-scalable'],
     'initial-scale='+originalScale,
-    'minimum-scale='+originalScale,
-    'maximum-scale='+originalScale,
-  ].join(','));
+    'minimum-scale='+initial['minimum-scale'],
+    'maximum-scale='+initial['maximum-scale'],
+    (initial.width ? 'width='+initial.width : null)
+  ].filter(Boolean).join(','));
 
-  setTimeout(function() {
-    if (testEvts && testEvts.onRestoreScale)
-      testEvts.onRestoreScale();
+  setScroll(originalScroll);
 
-    // 2. Restore the page's zoom bounds.
-    hook.setAttribute('content', [
-      'user-scalable='+initial['user-scalable'],
-      'initial-scale='+originalScale,
-      'minimum-scale='+initial['minimum-scale'],
-      'maximum-scale='+initial['maximum-scale']
-    ].join(','));
+  setTimeout(function(){
+    if (testEvts && testEvts.onRestoreBounds)
+      testEvts.onRestoreBounds();
 
-    setTimeout(function(){
-      if (testEvts && testEvts.onRestoreBounds)
-        testEvts.onRestoreBounds();
+    document.head.removeChild(hook);
 
-      // 3. Restore the viewport size.
-      if (initial.width) {
-        hook.setAttribute('content', [
-          'width='+initial['width']
-        ].join(','));
-      }
+    if (testEvts && testEvts.onRestoreScroll)
+      testEvts.onRestoreScroll();
 
-      setTimeout(function() {
-        // Remove our meta viewport hook.
-        document.head.removeChild(hook);
-
-        // 4. Restore the viewport position (scroll).
-        setScroll(originalScroll);
-
-        if (testEvts && testEvts.onRestoreScroll)
-          testEvts.onRestoreScroll();
-
-        if (onDone)
-          onDone();
-
-      }, refreshDelay);
-    }, refreshDelay);
+    if (onDone)
+      onDone();
   }, refreshDelay);
 }
 
