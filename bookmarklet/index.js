@@ -139,6 +139,11 @@ function getMobileOS() {
   }
 }
 
+function isFirefox() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  return userAgent.match(/Firefox/i) ? true : false;
+}
+
 //---------------------------------------------------------------------------
 // State and Constants
 //---------------------------------------------------------------------------
@@ -285,12 +290,15 @@ function freeze(scale) {
   // solution, the next time the user pinch-zooms
   // in this state, the viewport will auto-snap
   // to our scale.
+
+  var includeWidth = (getMobileOS() === 'Android' && isFirefox());
   hook.setAttribute('content', [
     'user-scalable=yes',
     'initial-scale='+scale,
     'minimum-scale='+scale,
-    'maximum-scale='+(scale+0.004)
-  ].join(','));
+    'maximum-scale='+(scale+0.004),
+    (includeWidth ? 'width=device-width' : null)
+  ].filter(Boolean).join(','));
 
   if (onDone) {
     setTimeout(onDone, refreshDelay);
