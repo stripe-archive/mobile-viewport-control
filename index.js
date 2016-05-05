@@ -29,14 +29,13 @@
 
 function getScroll() {
   return {
-    left: document.body.scrollLeft,
-    top: document.body.scrollTop,
+    top: window.pageYOffset || document.documentElement.scrollTop,
+    left: window.pageXOffset || document.documentElement.scrollLeft
   };
 }
 
 function setScroll(scroll) {
-  document.body.scrollLeft = scroll.left;
-  document.body.scrollTop = scroll.top;
+  window.scrollTo(scroll.left, scroll.top);
 }
 
 //---------------------------------------------------------------------------
