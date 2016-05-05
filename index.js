@@ -74,6 +74,25 @@ function getInitialViewport(withDefaults) {
   return viewport;
 }
 
+function getPrettyInitialViewport() {
+  var initial = getInitialViewport();
+  var keyvals = [];
+  for (var prop in initial) {
+    if (initial.hasOwnProperty(prop)) {
+      keyvals.push({key:prop, val:initial[prop]});
+    }
+  }
+  return (
+    keyvals.sort(function(a,b) {
+      if (a.key < b.key) return -1;
+      if (a.key > b.key) return 1;
+      return 0;
+    }).map(function(kv) {
+      return kv.key + '=' + kv.val;
+    }).join(',\n')
+  );
+}
+
 //---------------------------------------------------------------------------
 // Calculating current viewport scale
 // simplified from: http://menacingcloud.com/?c=viewportScale
@@ -364,6 +383,7 @@ function thaw(onDone, testEvts) {
 
 return {
   getInitialViewport: getInitialViewport,
+  getPrettyInitialViewport: getPrettyInitialViewport,
   getScale: getScale,
   isolate: isolate,
   undoIsolate: undoIsolate,

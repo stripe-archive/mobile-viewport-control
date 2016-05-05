@@ -11,8 +11,8 @@
 
   function test() {
     var isolated = createIsolatedElement();
-    var initial = JSON.stringify(viewport.getInitialViewport());
-    alert("About to freeze viewport on a custom element... Viewport is: "+initial);
+    var initial = viewport.getPrettyInitialViewport();
+    alert("About to freeze viewport on a custom element... Viewport is:\n"+initial);
     viewport.freeze(1, isolated.id);
   }
 
