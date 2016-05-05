@@ -30,30 +30,13 @@
           expected: 1.25,
         });
 
-        mobileViewportControl.thaw(null, {
-          onRestoreScale: function() {
-            assert({
-              name: "getScale() after scale restore",
-              actual: mobileViewportControl.getScale(),
-              expected: origScale,
-            });
-          },
-          onRestoreBounds: function() {
-            assert({
-              name: "getScale() after scale bounds restore",
-              actual: mobileViewportControl.getScale(),
-              expected: origScale,
-            });
-            log("please verify that you CAN pinch-zoom");
-          },
-          onRestoreScroll: function(){
-            assert({
-              name: "getScale() after scroll restore",
-              actual: mobileViewportControl.getScale(),
-              expected: origScale,
-            });
-            finishTesting();
-          }
+        mobileViewportControl.thaw(function(){
+          assert({
+            name: "getScale() after thaw",
+            actual: mobileViewportControl.getScale(),
+            expected: origScale,
+          });
+          finishTesting();
         });
       });
     }, globalTest.waitLength);

@@ -308,7 +308,7 @@ function freeze(scale) {
 // Thawing
 //---------------------------------------------------------------------------
 
-function thawIOS(hook, initial, onDone, testEvts) {
+function thawIOS(hook, initial, onDone) {
 
   // Restore the user's manual zoom.
   hook.setAttribute('content', [
@@ -336,7 +336,7 @@ function thawIOS(hook, initial, onDone, testEvts) {
   }, refreshDelay);
 }
 
-function thawAndroid(hook, initial, onDone, testEvts) {
+function thawAndroid(hook, initial, onDone) {
   hook.setAttribute('content', [
     'user-scalable='+initial['user-scalable'],
     'initial-scale='+originalScale,
@@ -356,7 +356,7 @@ function thawAndroid(hook, initial, onDone, testEvts) {
 
 // Thaw the viewport, restoring the scale and scroll to what it
 // was before freezing.
-function thaw(onDone, testEvts) {
+function thaw(onDone) {
   // restore body visibility
   var style = document.getElementById(styleID);
   if (style) {
@@ -373,14 +373,14 @@ function thaw(onDone, testEvts) {
 
   var os = getMobileOS();
   if (os === 'iOS') {
-    thawIOS(hook, initial, onDone, testEvts);
+    thawIOS(hook, initial, onDone);
   }
   else if (os === 'Android') {
-    thawAndroid(hook, initial, onDone, testEvts);
+    thawAndroid(hook, initial, onDone);
   }
   else {
     // For other browsers, we just try Android's method.
-    thawAndroid(hook, initial, onDone, testEvts);
+    thawAndroid(hook, initial, onDone);
   }
 }
 
