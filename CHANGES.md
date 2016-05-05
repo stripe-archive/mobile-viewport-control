@@ -1,5 +1,13 @@
 # Changes
 
+## 0.3.0
+
+- iOS - zoom bounds restored on thaw
+- UIWebView - partial freeze support (double-tap or pinch-zoom auto-zooms)
+- Android Firefox - scroll fixed on thaw
+- Android Firefox - page width fixed on freeze
+- Android Chrome/WebView - scroll/scale fixed on thaw
+
 ## 0.2.0
 
 - add option for isolating an element when freezing
