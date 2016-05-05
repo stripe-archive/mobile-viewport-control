@@ -309,8 +309,7 @@ function freeze(scale) {
 // Thawing
 //---------------------------------------------------------------------------
 
-function thawIOS(hook, initial, onDone) {
-
+function thawWebkit(hook, initial, onDone) {
   // Restore the user's manual zoom.
   hook.setAttribute('content', [
     'initial-scale='+originalScale,
@@ -337,7 +336,40 @@ function thawIOS(hook, initial, onDone) {
   }, refreshDelay);
 }
 
-function thawAndroid(hook, initial, onDone) {
+function thawGecko(hook, initial, onDone) {
+  // Restore the user's manual zoom.
+  hook.setAttribute('content', [
+    'initial-scale='+originalScale,
+    'minimum-scale='+originalScale,
+    'maximum-scale='+originalScale
+  ].join(','));
+
+  // Updating the scroll here is too early,
+  // but it's used to force a refresh of the viewport
+  // with our current desired scale.
+  setScroll(originalScroll);
+
+  setTimeout(function(){
+    // Restore the page's zoom bounds.
+    hook.setAttribute('content', [
+      'user-scalable='+initial['user-scalable'],
+      'minimum-scale='+initial['minimum-scale'],
+      'maximum-scale='+initial['maximum-scale'],
+      (initial.width ? 'width='+initial.width : null)
+    ].filter(Boolean).join(','));
+
+    // Restore the scroll again now that the scale is correct.
+    setScroll(originalScroll);
+
+    // Remove our meta viewport hook.
+    document.head.removeChild(hook);
+
+    if (onDone)
+      onDone();
+  }, refreshDelay);
+}
+
+function thawBlink(hook, initial, onDone) {
   hook.setAttribute('content', [
     'user-scalable='+initial['user-scalable'],
     'initial-scale='+originalScale,
@@ -372,17 +404,14 @@ function thaw(onDone) {
 
   var initial = getInitialViewport(true);
 
+  // thaw function defaults to webkit
+  var thawFunc = thawWebkit;
   var os = getMobileOS();
-  if (os === 'iOS') {
-    thawIOS(hook, initial, onDone);
-  }
-  else if (os === 'Android') {
-    thawAndroid(hook, initial, onDone);
-  }
-  else {
-    // For other browsers, we just try Android's method.
-    thawAndroid(hook, initial, onDone);
-  }
+  if (os === 'Android')  { thawFunc = isFirefox() ? thawGecko : thawBlink; }
+  else if (os === 'iOS') { thawFunc = thawWebkit; }
+
+  // call appropriate thaw function
+  thawFunc(hook, initial, onDone);
 }
 
 //---------------------------------------------------------------------------
