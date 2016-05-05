@@ -75,7 +75,7 @@ Compatibility is measured with a combination of automatic/manual testing:
 | Android Browser (Stock)    | ?                | ?             | ?                  |                          |
 | Android Chrome             | Y                | Y             | Y                  | devtools or bookmarklet  |
 | Android WebView            | Y                | Y             | Y                  | devtools                 |
-| Android Chrome Custom Tabs | Y                | Y             | Y                  |                          |
+| Android Chrome Custom Tabs | Y                | Y             | Y                  | devtools                 |
 | Android Firefox            | Y                | Fails         | Fails              | devtools or bookmarklet  |
 | Android Opera Mini         | Fails            | Fails         | Fails              |                          |
 
