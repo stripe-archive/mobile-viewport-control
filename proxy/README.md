@@ -33,7 +33,7 @@ device, then connect it to the proxy.
    Safari, which will proceed with the steps for adding the certificate as a
    trusted profile on your phone.
 
-3. Finally, make sure your phone is connected to the same Wifi network as the
+3. Now, make sure your phone is connected to the same Wifi network as the
    running proxy server.  Under Settings > Wi-Fi > (Your Network), under HTTP
    Proxy, select Manual and fill in:
 
@@ -42,4 +42,18 @@ device, then connect it to the proxy.
    Port:      8081
    ```
 
-4. Any webpage you navigate to on your phone should now have the injected JS.
+4. Finally, create a `domains` file in this directory, a whitelist of domains
+   whose pages will be injected with JS.  One domain per line.
+
+   ```
+   example.com
+   github.com
+   ```
+
+5. Any webpage you navigate to on your phone should now have the injected JS.
+
+6. __NOTE__: The proxy is a bit a flaky.  Refreshing a page seems to crash the
+   proxy server sometimes, so you will need to restart it when it does.  The
+   crash generally happens after most of the page and the script has loaded.
+   Closing and reopening the browser sometimes helps.
+
