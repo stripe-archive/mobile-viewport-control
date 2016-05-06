@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "http-mitm-proxy": "^0.4.0"
+  }
+}
