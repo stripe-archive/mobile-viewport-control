@@ -35,7 +35,14 @@ function getScroll() {
 }
 
 function setScroll(scroll) {
-  window.scrollTo(scroll.left, scroll.top);
+  if (window.scrollTo) {
+    window.scrollTo(scroll.left, scroll.top);
+  } else {
+    document.documentElement.scrollTop = scroll.top;
+    document.documentElement.scrollLeft = scroll.left;
+    document.body.scrollTop = scroll.top;
+    document.body.scrollLeft = scroll.left;
+  }
 }
 
 //---------------------------------------------------------------------------
@@ -371,7 +378,9 @@ function thawGecko(hook, initial, onDone) {
 function thawBlink(hook, initial, onDone) {
   hook.setAttribute('content', [
     'user-scalable='+initial['user-scalable'],
-    'initial-scale='+originalScale,
+    // WebView does not support this:
+    //'initial-scale='+originalScale
+    'initial-scale='+initial['initial-scale'],
     'minimum-scale='+initial['minimum-scale'],
     'maximum-scale='+initial['maximum-scale'],
     (initial.width ? 'width='+initial.width : null)
