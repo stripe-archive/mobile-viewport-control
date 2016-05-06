@@ -68,9 +68,9 @@ Compatibility is measured with a combination of automatic/manual testing:
 | iOS Safari                 | Y                | Y             | Y                  | devtools                 |
 | iOS UIWebView              | Y                | Fails\*\*     | Y if freeze works. | xcode+devtools           |
 | iOS WKWebView              | Y                | Y             | Y                  | xcode+devtools           |
-| iOS SFSafariViewController | Y                | Y             | Y                  |                          |
+| iOS SFSafariViewController | Y                | Y             | Y                  | MITM proxy               |
 | iOS Chrome                 | Y                | Y             | Y                  | bookmarklet              |
-| iOS Firefox                | Y                | Y             | Y                  |                          |
+| iOS Firefox                | Y                | Y             | Y                  | MITM proxy               |
 | iOS Opera Mini             | Y                | Fails\*\*     | Y if freeze works. |                          |
 | Android Browser (Stock)    | ?                | ?             | ?                  |                          |
 | Android Chrome             | Y                | Y             | Y                  | devtools or bookmarklet  |
@@ -127,6 +127,11 @@ document.body.appendChild(document.createElement('script')).src='https://rawgit.
 iOS webviews require an extra step: you must run an webview app from a live
 XCode project on your mac.  Only then will Desktop Safari DevTools to connect
 to its webview.
+
+##### With Man-in-the-middle (MITM) Proxy
+
+See [proxy/](proxy) directory for instructions on this last resort testing
+method.
 
 ### Variables
 
