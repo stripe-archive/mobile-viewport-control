@@ -1,3 +1,6 @@
+// Copied from an example in node-http-mitm-proxy:
+// https://github.com/joeferner/node-http-mitm-proxy/blob/cc1ea9a81e322fe5cd201ddc822ba2eedcec63d0/examples/processFullResponseBody.js
+
 'use strict';
 
 var port = 8081;
