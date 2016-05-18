@@ -5,14 +5,13 @@
   <link rel="stylesheet" type="text/css" href="test.css">
 </head>
 <body>
-  <h1>Freeze Test</h1>
+  <h1>Thaw Test</h1>
   <button id="runBtn">Run Test</button>
   <div id="resultDiv"></div>
   <hr>
-  <a href="01-measure.html">&lt; Measure Test</a> |
-  <a href="03-thaw.html">Thaw Test &gt;</a>
+  <a href="02-freeze.html">&lt; Freeze Test</a>
 
-  <script src="../index.js"></script>
+  <script src="../../index.js"></script>
   <script src="test.js"></script>
 
   <script>
@@ -30,8 +29,15 @@
           actual: mobileViewportControl.getScale(),
           expected: 1.25,
         });
-        log("please verify that you CANNOT pinch-zoom");
-        finishTesting();
+
+        mobileViewportControl.thaw(function(){
+          assert({
+            name: "getScale() after thaw",
+            actual: mobileViewportControl.getScale(),
+            expected: origScale,
+          });
+          finishTesting();
+        });
       });
     }, globalTest.waitLength);
   };

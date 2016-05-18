@@ -1,4 +1,13 @@
-## Compatibility Testing
+# Testing
+
+We currently have no automated tests setup in CI yet.  Below are research notes
+on what has been tested and how.
+
+- `bookmarklet/` - injecting a test script into existing pages through a bookmarklet
+- `proxy/` - injecting a test script into any page accessed through a proxy
+- `unit/` - standalone tests for verifying steps of expected behavior
+
+## Compatibility
 
 > __NOTE__: We do not test with Simulators, as iOS Simulator has been shown to
 > produce different results than the real environment with regards to
@@ -15,7 +24,7 @@ Compatibility is measured with a combination of automatic/manual testing:
   1. Manual step - verify that you can still pinch-zoom after the test
 1. __[Injection Method]__ - verify it works for any webpage by running a bookmarklet test to inject JS into the page
 
-| Mobile Browser             | [Measure Test]\* | [Freeze Test] | [Thaw Test]        | [Injection Method]       |
+| Mobile Browsers (latest)   | [Measure Test]\* | [Freeze Test] | [Thaw Test]        | [Injection Method]       |
 |----------------------------|------------------|---------------|--------------------|--------------------------|
 | iOS Safari                 | Y                | Y             | Y                  | devtools                 |
 | iOS UIWebView              | Y                | Fails\*\*     | Y if freeze works. | xcode+devtools           |
@@ -39,18 +48,18 @@ page's scale to change from its specified `initial-scale`.  This custom zoom
 level is maintained across refreshes.  When opening in a new tab, the
 `initial-scale` is resumed._
 
-[Measure Test]:http://shaunstripe.github.io/mobile-viewport-control/test/01-measure.html
-[Freeze Test]:http://shaunstripe.github.io/mobile-viewport-control/test/02-freeze.html
-[Thaw Test]:http://shaunstripe.github.io/mobile-viewport-control/test/03-thaw.html
+[Measure Test]:http://shaunstripe.github.io/mobile-viewport-control/test/unit/01-measure.html
+[Freeze Test]:http://shaunstripe.github.io/mobile-viewport-control/test/unit/02-freeze.html
+[Thaw Test]:http://shaunstripe.github.io/mobile-viewport-control/test/unit/03-thaw.html
 [Injection Method]:#injecting-into-existing-pages
 
-### Injecting into Existing Pages
+## Injecting into Existing Pages
 
 To allow us to quickly gauge compatibility for externally owned webpages
 across several browsers, we must be able to inject our library code into
 their running pages.
 
-##### With Bookmarklet
+### With Bookmarklet
 
 Bookmarklets are URLs of the form `javascript:(function(){ ... }())` which some
 browsers allow for evaluating JS in the context of the current page.  The
@@ -61,10 +70,10 @@ The following bookmarklet will freeze the viewport scale, show a custom
 isolated element, and allow you to press a button to restore the view.
 
 ```js
-javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://rawgit.com/shaunstripe/mobile-viewport-control/master/bookmarklet/index.js?'+Math.random();}())
+javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet/index.js?'+Math.random();}())
 ```
 
-##### With DevTools
+### With DevTools
 
 Some mobile browsers allow you to connect to a Desktop DevTools environment
 with a JS console for evaluating JS in the context of its page.  iOS Safari
@@ -73,19 +82,19 @@ Chrome/webview can connect to Desktop Chrome DevTools.  Inside DevTools, we can
 simply paste the body of the bookmarklet inside the JS console:
 
 ```js
-document.body.appendChild(document.createElement('script')).src='https://rawgit.com/shaunstripe/mobile-viewport-control/master/bookmarklet/index.js?'+Math.random();
+document.body.appendChild(document.createElement('script')).src='https://rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet/index.js?'+Math.random();
 ```
 
 iOS webviews require an extra step: you must run an webview app from a live
 XCode project on your mac.  Only then will Desktop Safari DevTools to connect
 to its webview.
 
-##### With Man-in-the-middle (MITM) Proxy
+### With Man-in-the-middle (MITM) Proxy
 
 See [proxy/](proxy) directory for instructions on this last resort testing
 method.
 
-### Variables
+## Variables
 
 We currently do not test all variables, but the test outcomes depend on the following:
 
@@ -99,7 +108,7 @@ We currently do not test all variables, but the test outcomes depend on the foll
   - manual zoom after page load and before test run
 - initial zoom bounds (controlled by page's original viewport meta tags)
 
-### Quirks when Dynamically Modifying Viewport
+## Quirks when Dynamically Modifying Viewport
 
 - iOS UIWebView does not allow scale adjustments after the user has manually adjusted it.
 - Android does not register a new viewport meta tag if it is immediately removed after creation.

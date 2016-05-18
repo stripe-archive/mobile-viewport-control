@@ -2,13 +2,19 @@
 
 var port = 8081;
 
+// To have a remote console:
+// 1. Go to jsconsole.com and type ':listen'
+// 2. Paste in the code below
+var jsconsoleKey = '81CFF34E-C612-438B-8488-82757B2E4F30';
+var jsconsoleHost = '10.0.0.173:8080'
+
 var fs = require('fs');
 var colors = require('colors');
 var Proxy = require('http-mitm-proxy');
 var proxy = Proxy();
 
 // get JS that we will inject into the webpages
-var libJS = fs.readFileSync('../index.js','utf8');
+var libJS = fs.readFileSync('../../index.js','utf8');
 var testJS = fs.readFileSync('test.js','utf8');
 
 // get and print domain whitelist
@@ -72,7 +78,9 @@ function injectJS(host, url, body) {
   return bodyStr.replace(
     tag,
     '<script>' + libJS + '</script>' +
-    '<script>' + testJS + '</script>' + tag
+    '<script>' + testJS + '</script>' +
+    '<script src="http://' + jsconsoleHost + '/remote.js?' + jsconsoleKey + '"></script>' +
+    tag
   );
 }
 
