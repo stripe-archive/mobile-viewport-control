@@ -115,6 +115,10 @@ else on the page.  Just make sure your element is a direct child of
 viewport.freeze(1.0, 'myElementID');
 ```
 
+## Testing
+
+Please see __[Compatibility Testing](test/)__.
+
 ## License
 
 [ISC License](LICENSE)
