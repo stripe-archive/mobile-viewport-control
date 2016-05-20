@@ -119,6 +119,10 @@ viewport.freeze(1.0, 'myElementID');
 
 [ISC License](LICENSE)
 
+--
+
+_Source code for the animated figures above: [mobile-viewport-control-viz](https://github.com/shaunstripe/mobile-viewport-control-viz)_
+
 
 [scroll-gif]:https://zippy.gfycat.com/EnchantedPowerfulIndri.gif
 [scroll-gfy]:https://gfycat.com/EnchantedPowerfulIndri
