@@ -63,6 +63,40 @@ else on the page.  Just make sure your element is a direct child of
 viewport.freeze(1.0, 'myElementID');
 ```
 
+## A Visual Guide
+
+ <table>
+  <tr>
+    <td>[![scroll][scroll-gif]][scroll-gfy]</td>
+    <td>[![zoom][zoom-gif]][zoom-gfy]</td>
+  </tr>
+  <tr>
+    <td>__Figure 1.__ Scrolling</td>
+    <td>__Figure 2.__ Zooming + Scrolling</td>
+  </tr>
+</table>
+
+ <table>
+  <tr>
+    <td>[![freeze][freeze-gif]][freeze-gfy]</td>
+    <td>[![isolate][isolate-gif]][isolate-gfy]</td>
+  </tr>
+  <tr>
+    <td>__Figure 3.__ Freezing and Thawing</td>
+    <td>__Figure 4.__ Isolating on Freeze (i.e. modal)</td>
+  </tr>
+ </table>
+
+[scroll-gif]:https://zippy.gfycat.com/EnchantedPowerfulIndri.gif
+[zoom-gif]:https://zippy.gfycat.com/InconsequentialImperturbableBuckeyebutterfly.gif
+[freeze-gif]:https://fat.gfycat.com/YearlyBitesizedBangeltiger.gif
+[isolate-gif]:https://fat.gfycat.com/MetallicFrighteningApisdorsatalaboriosa.gif
+
+[scroll-gfy]:https://gfycat.com/EnchantedPowerfulIndri
+[zoom-gfy]:https://gfycat.com/InconsequentialImperturbableBuckeyebutterfly
+[freeze-gfy]:https://gfycat.com/YearlyBitesizedBangeltiger
+[isolate-gfy]:https://gfycat.com/MetallicFrighteningApisdorsatalaboriosa
+
 ## License
 
 [ISC License](LICENSE)
