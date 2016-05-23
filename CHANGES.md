@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.1
+
+- android webview support
+
 ## 0.3.0
 
 - iOS - zoom bounds restored on thaw

@@ -1,6 +1,6 @@
 {
   "name": "mobile-viewport-control",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Dynamically control the mobile viewport",
   "main": "index.js",
   "repository": {
