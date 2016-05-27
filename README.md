@@ -1,7 +1,5 @@
 > Currently in development and not ready for production use yet.
 
-[Stripe Checkout]:https://stripe.com/checkout
-
 # Mobile Viewport Control
 
 This JavaScript library attempts to solve the hard problem of creating a
