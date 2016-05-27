@@ -1,4 +1,4 @@
-> Currently in development for [Stripe Checkout].  It has not seen production use yet.
+> Currently in development and not ready for production use yet.
 
 [Stripe Checkout]:https://stripe.com/checkout
 
