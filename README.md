@@ -1,4 +1,4 @@
-> This library is under active development. Please [email us](shaun@stripe.com) if you’re ready to use it in a production environment.
+> This library is under active development. Please [email us](mailto:shaun@stripe.com) if you’re ready to use it in a production environment.
 
 # Mobile Viewport Control
 
