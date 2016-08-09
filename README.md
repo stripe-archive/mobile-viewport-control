@@ -57,8 +57,11 @@ everywhere (see [Stripe Checkout] and [Auth0 Lock]).  For browsers that cannot
 create pop-up tabs and for pages where redirection is not an option, this
 library can help fill in the gaps.
 
+> UPDATE: See the upcoming _[Payment Request API]_ for native mobile checkout modals for the web.
+
 [Stripe Checkout]:https://stripe.com/checkout
 [Auth0 Lock]:https://auth0.com/lock
+[Payment Request API]:https://developers.google.com/web/updates/2016/07/payment-request
 
 --
 
