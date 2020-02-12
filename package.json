@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaunstripe/mobile-viewport-control.git"
+    "url": "git+https://github.com/stripe/mobile-viewport-control.git"
   },
   "files": [
     "index.js"

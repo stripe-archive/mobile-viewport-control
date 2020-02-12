@@ -130,7 +130,7 @@ Please see __[Compatibility Testing](test/)__.
 
 --
 
-_Source code for the animated figures above: [mobile-viewport-control-viz](https://github.com/shaunstripe/mobile-viewport-control-viz)_
+_Source code for the animated figures above: [mobile-viewport-control-viz](https://github.com/shaun-stripe/mobile-viewport-control-viz)_
 
 
 [scroll-gif]:https://zippy.gfycat.com/EnchantedPowerfulIndri.gif

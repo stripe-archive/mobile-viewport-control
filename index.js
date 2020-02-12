@@ -4,7 +4,7 @@
 // Copyright (c) 2016 Shaun Williams
 // ISC License
 //
-// GitHub: https://github.com/shaunstripe/mobile-viewport-control
+// GitHub: https://github.com/stripe/mobile-viewport-control
 //
 
 //---------------------------------------------------------------------------

@@ -48,9 +48,9 @@ page's scale to change from its specified `initial-scale`.  This custom zoom
 level is maintained across refreshes.  When opening in a new tab, the
 `initial-scale` is resumed._
 
-[Measure Test]:http://shaunstripe.github.io/mobile-viewport-control/test/unit/01-measure.html
-[Freeze Test]:http://shaunstripe.github.io/mobile-viewport-control/test/unit/02-freeze.html
-[Thaw Test]:http://shaunstripe.github.io/mobile-viewport-control/test/unit/03-thaw.html
+[Measure Test]:http://stripe.github.io/mobile-viewport-control/test/unit/01-measure.html
+[Freeze Test]:http://stripe.github.io/mobile-viewport-control/test/unit/02-freeze.html
+[Thaw Test]:http://stripe.github.io/mobile-viewport-control/test/unit/03-thaw.html
 [Injection Method]:#injecting-into-existing-pages
 
 ## Injecting into Existing Pages
@@ -70,7 +70,7 @@ The following bookmarklet will freeze the viewport scale, show a custom
 isolated element, and allow you to press a button to restore the view.
 
 ```js
-javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet/index.js?'+Math.random();}())
+javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://stripe.github.io/mobile-viewport-control/test/bookmarklet/index.js?'+Math.random();}())
 ```
 
 ### With DevTools
@@ -82,7 +82,7 @@ Chrome/webview can connect to Desktop Chrome DevTools.  Inside DevTools, we can
 simply paste the body of the bookmarklet inside the JS console:
 
 ```js
-document.body.appendChild(document.createElement('script')).src='https://rawgit.com/shaunstripe/mobile-viewport-control/master/test/bookmarklet/index.js?'+Math.random();
+document.body.appendChild(document.createElement('script')).src='https://stripe.github.io/mobile-viewport-control/test/bookmarklet/index.js?'+Math.random();
 ```
 
 iOS webviews require an extra step: you must run an webview app from a live
