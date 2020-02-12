@@ -48,12 +48,12 @@ viewport state at runtime by adding and modifying viewport tags.  There are
 caveats depending on the browser.  The goal of this library is to identify and
 workaround these caveats until there is a standard for programmatically
 controlling zoom.  We have researched and tested on multiple platforms, though
-we are currently focusing support for Mobile Safari and WebViews on iOS 7,8,9.
+we are currently focusing support for Mobile Safari and WebViews on iOS 7, 8, and 9.
 (See __[Compatibility Testing](test/)__)
 
 __Modals are the Use-Case.__ Viewport settings vary widely across different
 webpages, making it hard to create drop-in modal experiences that work
-everywhere (see [Stripe Checkout] and [Auth0 Lock]).  For browsers that cannot
+everywhere (see [Stripe Checkout] and [Auth0 Lock]). For browsers that cannot
 create pop-up tabs and for pages where redirection is not an option, this
 library can help fill in the gaps.
 
