@@ -1,4 +1,6 @@
-> This library is under active development. Please [email us](mailto:shaun@stripe.com) if you’re ready to use it in a production environment.
+> <img src="https://stripe.dev/images/badges/archived.png" width="250">
+>
+> This project is inactive and is no longer being maintained.
 
 # Mobile Viewport Control
 
